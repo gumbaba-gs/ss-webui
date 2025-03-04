@@ -15,6 +15,8 @@ import ProductsSection from './components/home/ProductsSection';
 import ContactSection from './components/home/ContactSection';
 import Footer from './components/layout/Footer';
 
+import { ThemeProvider } from './context/ThemeContext/ThemeContext';
+
 function App() {
   useEffect(() => {
     // Add Font Awesome

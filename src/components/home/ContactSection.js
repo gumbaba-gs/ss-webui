@@ -48,8 +48,8 @@ const ContactSection = () => {
             <h3 className="text-2xl font-bold mb-6 text-gray-800">Contact Information</h3>
 
             <div className="flex items-start mb-6">
-              <div className="bg-blue-100 p-3 rounded-full mr-4">
-                <i className="fas fa-map-marker-alt text-blue-600"></i>
+              <div className="bg-primary/10 p-3 rounded-full mr-4">
+                <i className="fas fa-map-marker-alt text-primary"></i>
               </div>
               <div>
                 <h4 className="font-semibold mb-1">Address</h4>
@@ -68,8 +68,8 @@ const ContactSection = () => {
             </div>
 
             <div className="flex items-start mb-6">
-              <div className="bg-blue-100 p-3 rounded-full mr-4">
-                <i className="fas fa-phone text-blue-600"></i>
+              <div className="bg-primary/10 p-3 rounded-full mr-4">
+                <i className="fas fa-phone text-primary"></i>
               </div>
               <div>
                 <h4 className="font-semibold mb-1">Phone</h4>
@@ -79,16 +79,16 @@ const ContactSection = () => {
 
             <h3 className="text-2xl font-bold mt-10 mb-6 text-gray-800">Connect With Us</h3>
             <div className="flex space-x-4">
-              <button className="bg-blue-500 hover:bg-blue-600 text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors">
+              <button className="bg-primary hover:bg-primary/90 text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors">
                 <i className="fab fa-linkedin-in"></i>
               </button>
-              <button className="bg-blue-400 hover:bg-blue-500 text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors">
+              <button className="bg-secondary hover:bg-secondary/90 text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors">
                 <i className="fab fa-twitter"></i>
               </button>
-              <button className="bg-red-500 hover:bg-red-600 text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors">
+              <button className="bg-error hover:bg-error/90 text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors">
                 <i className="fab fa-youtube"></i>
               </button>
-              <button className="bg-green-500 hover:bg-green-600 text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors">
+              <button className="bg-accent hover:bg-accent/90 text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors">
                 <i className="fas fa-envelope"></i>
               </button>
             </div>
@@ -100,7 +100,7 @@ const ContactSection = () => {
             <form className="contact-form" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="name" className="block text-gray-700 mb-2">Name</label>
+                  <label htmlFor="name" className="block text-text mb-2">Name</label>
                   <input 
                     type="text" 
                     id="name" 
@@ -124,7 +124,7 @@ const ContactSection = () => {
               </div>
 
               <div className="mt-4">
-                <label htmlFor="company" className="block text-gray-700 mb-2">Company</label>
+                <label htmlFor="company" className="block text-text mb-2">Company</label>
                 <input 
                   type="text" 
                   id="company" 
@@ -138,7 +138,7 @@ const ContactSection = () => {
                 <label htmlFor="interest" className="block text-gray-700 mb-2">I'm interested in:</label>
                 <select 
                   id="interest" 
-                  className="border border-gray-300 rounded-md p-2 w-full"
+                  className="border border-border rounded-md p-2 w-full"
                   value={formData.interest}
                   onChange={handleChange}
                 >
@@ -151,7 +151,7 @@ const ContactSection = () => {
               </div>
 
               <div className="mt-4">
-                <label htmlFor="message" className="block text-gray-700 mb-2">Message</label>
+                <label htmlFor="message" className="block text-text mb-2">Message</label>
                 <textarea 
                   id="message" 
                   rows="4" 
@@ -164,7 +164,7 @@ const ContactSection = () => {
 
               <button 
                 type="submit" 
-                className="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded transition duration-300"
+                className="mt-6 w-full bg-primary hover:bg-primary/90 text-white font-bold py-3 px-4 rounded transition duration-300"
               >
                 Send Message
               </button>

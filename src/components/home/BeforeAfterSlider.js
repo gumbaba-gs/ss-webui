@@ -64,17 +64,17 @@ const BeforeAfterSlider = () => {
   const getBerryAppearance = (day, isTreated) => {
     // Untreated berries degrade faster
     if (!isTreated) {
-      if (day <= 7) return 'bg-blue-700';
-      if (day <= 14) return 'bg-blue-600';
-      if (day <= 21) return 'bg-purple-500';
-      return 'bg-gray-500';
-    } 
+      if (day <= 7) return 'bg-primary';
+      if (day <= 14) return 'bg-secondary';
+      if (day <= 21) return 'bg-accent';
+      return 'bg-surface';
+    }
     // Treated berries maintain appearance longer
     else {
-      if (day <= 14) return 'bg-blue-700';
-      if (day <= 21) return 'bg-blue-600';
-      if (day <= 28) return 'bg-blue-600';
-      return 'bg-blue-500';
+      if (day <= 14) return 'bg-primary';
+      if (day <= 21) return 'bg-secondary';
+      if (day <= 28) return 'bg-accent';
+      return 'bg-surface';
     }
   };
   

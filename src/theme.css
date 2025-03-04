@@ -1,0 +1,55 @@
+:root {
+  /* Light Theme */
+  --light-primary: #0B3D91;
+  --light-secondary: #008080;
+  --light-accent: #00FFFF;
+  --light-background: #ffffff;
+  --light-text: #1e293b;
+  --light-surface: #f8fafc;
+  --light-border: #cbd5e1;
+
+  /* Dark Theme */
+  --dark-primary: #1E90FF;
+  --dark-secondary: #00CED1;
+  --dark-accent: #7FFFD4;
+  --dark-background: #0A192F;
+  --dark-text: #F8F8FF;
+  --dark-surface: #172A45;
+  --dark-border: #2F4F4F;
+
+  /* Theme Variables */
+  --primary-color: var(--light-primary);
+  --secondary-color: var(--light-secondary);
+  --accent-color: var(--light-accent);
+  --background-color: var(--light-background);
+  --text-color: var(--light-text);
+  --surface-color: var(--light-surface);
+  --border-color: var(--light-border);
+  
+  /* Semantic Variables */
+  --success: #22c55e;
+  --warning: #eab308;
+  --error: #ef4444;
+  --info: #3b82f6;
+}
+
+[data-theme="dark"] {
+  --primary-color: var(--dark-primary);
+  --secondary-color: var(--dark-secondary);
+  --accent-color: var(--dark-accent);
+  --background-color: var(--dark-background);
+  --text-color: var(--dark-text);
+  --surface-color: var(--dark-surface);
+  --border-color: var(--dark-border);
+}
+
+/* Chart Colors */
+.chart-primary {
+  fill: var(--primary-color);
+}
+.chart-secondary {
+  fill: var(--secondary-color);
+}
+.chart-accent {
+  fill: var(--accent-color);
+}

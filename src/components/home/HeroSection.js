@@ -19,13 +19,13 @@ const HeroSection = () => {
         >
           <a
             href="#products"
-            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105"
+            className="bg-primary hover:bg-primary/90 text-white font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105"
           >
             Our Products
           </a>
           <a
             href="#contact"
-            className="bg-transparent border-2 border-white hover:bg-white hover:text-blue-600 text-white font-bold py-3 px-8 rounded-full transition duration-300"
+            className="bg-transparent border-2 border-text hover:bg-background hover:text-primary text-text font-bold py-3 px-8 rounded-full transition duration-300"
           >
             Contact Us
           </a>
