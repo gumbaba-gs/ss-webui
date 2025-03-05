@@ -14,12 +14,12 @@ const ProductComparisonTool = () => {
     { id: 'citrus', name: 'Citrus', icon: '🍊', comingSoon: true },
   ];
   
-  // Preservation methods
+  // Preservation methods - Updated with theme colors
   const methods = [
-    { id: 'spanex', name: 'Spanex', color: 'bg-blue-600', textColor: 'text-blue-600' },
-    { id: 'waxes', name: 'Conventional Waxes', color: 'bg-yellow-500', textColor: 'text-yellow-600' },
-    { id: 'chemical', name: 'Chemical Preservatives', color: 'bg-red-500', textColor: 'text-red-600' },
-    { id: 'map', name: 'Modified Atmosphere', color: 'bg-purple-500', textColor: 'text-purple-600' },
+    { id: 'spanex', name: 'Spanex', color: 'bg-primary', textColor: 'text-primary' },
+    { id: 'waxes', name: 'Conventional Waxes', color: 'bg-warning', textColor: 'text-warning' },
+    { id: 'chemical', name: 'Chemical Preservatives', color: 'bg-error', textColor: 'text-error' },
+    { id: 'map', name: 'Modified Atmosphere', color: 'bg-secondary', textColor: 'text-secondary' },
   ];
   
   // Metrics for comparison
@@ -238,15 +238,15 @@ const ProductComparisonTool = () => {
   // Helper function to get color class based on value comparison
   const getComparisonClass = (value, otherValues, metric) => {
     if (metric.valueType === 'boolean') {
-      return value ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800';
+      return value ? 'bg-success-10 text-success' : 'bg-error-10 text-error';
     } else if (metric.valueType === 'rating') {
       const ratingValue = getRatingValue(value);
       const isHighest = !otherValues.some(v => getRatingValue(v) > ratingValue);
       
       if (metric.higherIsBetter) {
-        return isHighest ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800';
+        return isHighest ? 'bg-success-10 text-success' : 'bg-warning-10 text-warning';
       } else {
-        return isHighest ? 'bg-red-100 text-red-800' : 'bg-yellow-100 text-yellow-800';
+        return isHighest ? 'bg-error-10 text-error' : 'bg-warning-10 text-warning';
       }
     } else if (metric.valueType === 'money') {
       // For cost, we need to extract the numeric values from strings like "$0.05-0.10"
@@ -258,13 +258,13 @@ const ProductComparisonTool = () => {
       const numericValue = extractLowValue(value);
       const isLowest = !otherValues.some(v => extractLowValue(v) < numericValue);
       
-      return isLowest ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800';
+      return isLowest ? 'bg-success-10 text-success' : 'bg-warning-10 text-warning';
     } else if (metric.valueType === 'number') {
       // For numeric values like shelf life
       const numericOtherValues = otherValues.map(v => typeof v === 'string' ? parseFloat(v) : v);
       const isHighest = !numericOtherValues.some(v => v > value);
       
-      return isHighest ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800';
+      return isHighest ? 'bg-success-10 text-success' : 'bg-warning-10 text-warning';
     }
     
     return '';
@@ -289,9 +289,14 @@ const ProductComparisonTool = () => {
   }, [selectedProduct]);
 
   return (
-    <div className="max-w-6xl mx-auto bg-white p-6 rounded-xl shadow-lg">
+    <div className="w-full max-w-4xl mx-auto p-6 rounded-xl"
+            style={{
+              background: "linear-gradient(45deg, rgba(11, 61, 145, 0.05), rgba(0, 255, 255, 0.1))",
+              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1), 0 0 15px rgba(0, 255, 255, 0.2)",
+              border: "1px solid rgba(0, 255, 255, 0.2)"
+            }}>
       <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-gray-800 mb-2">Preservation Method Comparison</h2>
+        <h2 className="text-3xl font-bold text-text mb-2">Preservation Method Comparison</h2>
         <p className="text-gray-600 max-w-3xl mx-auto">
           Compare Spanex technology with traditional preservation methods across key performance metrics
         </p>
@@ -309,15 +314,15 @@ const ProductComparisonTool = () => {
                 product.comingSoon
                   ? 'bg-gray-100 border-gray-300 text-gray-500 cursor-not-allowed'
                   : selectedProduct === product.id
-                    ? 'bg-blue-600 border-blue-600 text-white'
-                    : 'bg-white border-gray-300 hover:border-blue-600 text-gray-700 hover:text-blue-600'
+                    ? 'bg-primary text-background border-primary'
+                    : 'bg-blue-100 border-border hover:border-primary text-text hover:text-primary'
               }`}
               disabled={product.comingSoon}
             >
               <span className="text-xl mr-2">{product.icon}</span>
               <span>{product.name}</span>
               {product.comingSoon && (
-                <span className="ml-2 text-xs bg-yellow-200 text-yellow-800 px-2 py-1 rounded-full">
+                <span className="ml-2 text-xs bg-warning-10 text-warning px-2 py-1 rounded-full">
                   Coming Soon
                 </span>
               )}
@@ -336,8 +341,8 @@ const ProductComparisonTool = () => {
               onClick={() => toggleMetric(metric.id)}
               className={`flex items-center px-3 py-1 rounded-full border transition-all ${
                 selectedMetrics.includes(metric.id)
-                  ? 'bg-blue-100 border-blue-300 text-blue-800'
-                  : 'bg-white border-gray-300 text-gray-700 hover:border-blue-300 hover:text-blue-600'
+                  ? 'bg-primary-10 border-primary text-primary'
+                  : 'bg-blue-100 border-border text-text hover:border-primary hover:text-primary'
               }`}
               title={metric.description}
             >
@@ -353,12 +358,12 @@ const ProductComparisonTool = () => {
         <table className="w-full border-collapse">
           <thead>
             <tr>
-              <th className="p-3 text-left bg-gray-50 border-b-2 border-gray-200"></th>
+              <th className="p-3 text-left bg-blue-100 border-b-2 border-border"></th>
               {methods.map(method => (
                 <th 
                   key={method.id}
-                  className={`p-3 text-center border-b-2 border-gray-200 ${
-                    highlightedMethod === method.id ? method.color + ' text-white' : 'bg-gray-50'
+                  className={`p-3 text-center border-b-2 border-border ${
+                    highlightedMethod === method.id ? method.color + ' text-background' : 'bg-blue-100'
                   }`}
                   onMouseEnter={() => setHighlightedMethod(method.id)}
                   onMouseLeave={() => setHighlightedMethod(null)}
@@ -373,8 +378,8 @@ const ProductComparisonTool = () => {
               const metric = metrics.find(m => m.id === metricId);
               
               return (
-                <tr key={metricId} className="hover:bg-gray-50">
-                  <td className="p-3 border-b border-gray-200">
+                <tr key={metricId} className="hover:bg-blue-100">
+                  <td className="p-3 border-b border-border">
                     <div className="flex items-center">
                       <span className="text-xl mr-2">{metric.icon}</span>
                       <div>
@@ -399,8 +404,8 @@ const ProductComparisonTool = () => {
                     return (
                       <td 
                         key={`${metricId}-${method.id}`} 
-                        className={`p-3 text-center border-b border-gray-200 ${
-                          isHighlighted ? 'bg-blue-50' : ''
+                        className={`p-3 text-center border-b border-border ${
+                          isHighlighted ? 'bg-primary-10' : ''
                         }`}
                       >
                         <div className={`inline-block px-3 py-1 rounded-full ${comparisonClass} ${
@@ -421,15 +426,15 @@ const ProductComparisonTool = () => {
       {/* Legend */}
       <div className="mt-6 flex flex-wrap items-center text-sm text-gray-600">
         <div className="mr-4 mb-2">
-          <span className="inline-block w-3 h-3 rounded-full bg-green-100 mr-1"></span>
+          <span className="inline-block w-3 h-3 rounded-full bg-success-10 mr-1"></span>
           Best performance
         </div>
         <div className="mr-4 mb-2">
-          <span className="inline-block w-3 h-3 rounded-full bg-yellow-100 mr-1"></span>
+          <span className="inline-block w-3 h-3 rounded-full bg-warning-10 mr-1"></span>
           Average performance
         </div>
         <div className="mr-4 mb-2">
-          <span className="inline-block w-3 h-3 rounded-full bg-red-100 mr-1"></span>
+          <span className="inline-block w-3 h-3 rounded-full bg-error-10 mr-1"></span>
           Poor performance
         </div>
       </div>
@@ -457,7 +462,7 @@ const ProductComparisonTool = () => {
                   }}
                 >
                   <div 
-                    className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-gray-100 px-2 py-1 rounded-full text-xs text-gray-700"
+                    className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-blue-100 px-2 py-1 rounded-full text-xs text-gray-700"
                     style={{
                       transform: `rotate(-${angle * (180 / Math.PI)}deg) translate(120px, 0)`,
                     }}

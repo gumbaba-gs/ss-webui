@@ -21,7 +21,12 @@ const TechnologySection = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+          <div className="w-full max-w-4xl mx-auto p-6 rounded-xl"
+            style={{
+              background: "linear-gradient(45deg, rgba(11, 61, 145, 0.05), rgba(0, 255, 255, 0.1))",
+              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1), 0 0 15px rgba(0, 255, 255, 0.2)",
+              border: "1px solid rgba(0, 255, 255, 0.2)"
+            }}>
             <div className="mechanism-icon text-blue-500 mb-4">
               <i className="fas fa-wind"></i>
             </div>
@@ -30,12 +35,15 @@ const TechnologySection = () => {
               Regulates gas exchange and slows down ethylene-induced ripening, extending shelf life by 
               delaying the natural aging process.
             </p>
-            <div className="text-sm text-gray-500">
-              <i className="fas fa-flask mr-1"></i> Key ingredients: Sodium alginate, Calcium chloride
-            </div>
+            
           </div>
 
-          <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+          <div className="w-full max-w-4xl mx-auto p-6 rounded-xl"
+            style={{
+              background: "linear-gradient(45deg, rgba(11, 61, 145, 0.05), rgba(0, 255, 255, 0.1))",
+              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1), 0 0 15px rgba(0, 255, 255, 0.2)",
+              border: "1px solid rgba(0, 255, 255, 0.2)"
+            }}>
             <div className="mechanism-icon text-teal-500 mb-4">
               <i className="fas fa-tint"></i>
             </div>
@@ -44,12 +52,14 @@ const TechnologySection = () => {
               Creates optimal moisture equilibrium to prevent both dehydration and excess moisture that 
               promotes mold growth.
             </p>
-            <div className="text-sm text-gray-500">
-              <i className="fas fa-flask mr-1"></i> Key ingredients: Glycerin, Pectin
-            </div>
           </div>
 
-          <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+          <div className="w-full max-w-4xl mx-auto p-6 rounded-xl"
+            style={{
+              background: "linear-gradient(45deg, rgba(11, 61, 145, 0.05), rgba(0, 255, 255, 0.1))",
+              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1), 0 0 15px rgba(0, 255, 255, 0.2)",
+              border: "1px solid rgba(0, 255, 255, 0.2)"
+            }}>
             <div className="mechanism-icon text-green-500 mb-4">
               <i className="fas fa-shield-virus"></i>
             </div>
@@ -58,12 +68,14 @@ const TechnologySection = () => {
               Creates an inhospitable environment for bacteria and fungi, preventing spoilage without 
               synthetic preservatives.
             </p>
-            <div className="text-sm text-gray-500">
-              <i className="fas fa-flask mr-1"></i> Key ingredients: Citric acid, Lactic acid, Potassium sorbate
-            </div>
           </div>
 
-          <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+          <div className="w-full max-w-4xl mx-auto p-6 rounded-xl"
+            style={{
+              background: "linear-gradient(45deg, rgba(11, 61, 145, 0.05), rgba(0, 255, 255, 0.1))",
+              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1), 0 0 15px rgba(0, 255, 255, 0.2)",
+              border: "1px solid rgba(0, 255, 255, 0.2)"
+            }}>
             <div className="mechanism-icon text-purple-500 mb-4">
               <i className="fas fa-atom"></i>
             </div>
@@ -71,9 +83,6 @@ const TechnologySection = () => {
             <p className="text-gray-600 mb-4">
               Prevents enzymatic browning and maintains color stability through powerful natural antioxidants.
             </p>
-            <div className="text-sm text-gray-500">
-              <i className="fas fa-flask mr-1"></i> Key ingredients: Ascorbic acid, Alpha-tocopherol, Rosemary extract
-            </div>
           </div>
         </div>
       </div>

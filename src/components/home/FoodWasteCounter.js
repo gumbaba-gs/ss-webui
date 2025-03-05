@@ -76,19 +76,6 @@ const FoodWasteCounter = () => {
   return (
     <section className="py-12 md:py-16 lg:py-20 bg-gradient-to-br from-gray-25 to-gray-50 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTAgMGgxNnYxNkgweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik04IDBjNC40yAwIDggMy41OCA4IDh2MWgtMS41M2ExLjQ3IDEuNDcgMCAwIDAtMS4wNi0uNDRjLS4zMyAwLS42NS4xMS0uOTEuMzFsLTIuMzQgMS44OGExLjQ3IDEuNDcgMCAwIDAtLjU0IDEuMTh2Mi4yNmMwIC4yLjA3LjM5LjE5LjU1bDEuNDggMS45OGExLjQ3IDEuNDcgMCAwIDEgLjM0IDEuMDd2Mi4yNmMwIC40Ni4zLjg1LjcxLjk3bDEuODkuNjNjLjQzLjE0LjkwLjAzIDEuMi0uMjkuMjgtLjI5LjQyLS42OC4zNy0xLjA3VjE0LjljLjA5LS40NS4zOC0uODQuNzgtMS4wMmwKMS4zOS0uNjljLjQ2LS4yMy43Ni0uNy43Ni0xLjIxVjhjMC00LjQyLTMuNTgtOC04LTh6IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMDUiLz48L3N2Zz4=')]">
       {/* Image section added above content */}
-      <div className="container mx-auto px-4 md:px-6 mb-12 md:mb-16">
-        <img
-          src="/images/waste-stats-graphic.webp"
-          alt="Food waste statistics visualization"
-          className="w-full h-auto rounded-2xl shadow-lg"
-          loading="lazy"
-          srcSet="/images/waste-stats-graphic-400.webp 400w,
-                  /images/waste-stats-graphic-800.webp 800w,
-                  /images/waste-stats-graphic-1200.webp 1200w"
-          sizes="(max-width: 640px) 100vw, 80vw"
-        />
-      </div>
-
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-10 md:mb-14">
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-5 text-gray-800 leading-tight">

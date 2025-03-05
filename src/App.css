@@ -1111,3 +1111,211 @@ input[type="range"]::-moz-range-thumb:hover {
 .bg-green-100 {
   background-color: #dcfce7;
 }
+
+/* Add these color utilities to your existing App.css file */
+
+/* Background colors */
+.bg-primary {
+  background-color: var(--primary-color);
+}
+.bg-secondary {
+  background-color: var(--secondary-color);
+}
+.bg-accent {
+  background-color: var(--accent-color);
+}
+.bg-success {
+  background-color: var(--success);
+}
+.bg-warning {
+  background-color: var(--warning);
+}
+.bg-error {
+  background-color: var(--error);
+}
+.bg-info {
+  background-color: var(--info);
+}
+.bg-surface {
+  background-color: var(--surface-color);
+}
+.bg-background {
+  background-color: var(--background-color);
+}
+
+/* Text colors */
+.text-primary {
+  color: var(--primary-color);
+}
+.text-secondary {
+  color: var(--secondary-color);
+}
+.text-accent {
+  color: var(--accent-color);
+}
+.text-success {
+  color: var(--success);
+}
+.text-warning {
+  color: var(--warning);
+}
+.text-error {
+  color: var(--error);
+}
+.text-info {
+  color: var(--info);
+}
+.text-body {
+  color: var(--text-color);
+}
+
+/* Border colors */
+.border-primary {
+  border-color: var(--primary-color);
+}
+.border-secondary {
+  border-color: var(--secondary-color);
+}
+.border-accent {
+  border-color: var(--accent-color);
+}
+.border-surface {
+  border-color: var(--surface-color);
+}
+.border-success {
+  border-color: var(--success);
+}
+.border-warning {
+  border-color: var(--warning);
+}
+.border-error {
+  border-color: var(--error);
+}
+.border-info {
+  border-color: var(--info);
+}
+
+/* Background colors with opacity */
+.bg-primary-10 {
+  background-color: rgba(var(--primary-color-rgb), 0.1);
+}
+.bg-primary-20 {
+  background-color: rgba(var(--primary-color-rgb), 0.2);
+}
+.bg-primary-50 {
+  background-color: rgba(var(--primary-color-rgb), 0.5);
+}
+
+.bg-secondary-10 {
+  background-color: rgba(var(--secondary-color-rgb), 0.1);
+}
+.bg-secondary-20 {
+  background-color: rgba(var(--secondary-color-rgb), 0.2);
+}
+.bg-secondary-50 {
+  background-color: rgba(var(--secondary-color-rgb), 0.5);
+}
+
+.bg-accent-10 {
+  background-color: rgba(var(--accent-color-rgb), 0.1);
+}
+.bg-accent-20 {
+  background-color: rgba(var(--accent-color-rgb), 0.2);
+}
+.bg-accent-50 {
+  background-color: rgba(var(--accent-color-rgb), 0.5);
+}
+
+.bg-success-10 {
+  background-color: rgba(var(--success-rgb), 0.1);
+}
+.bg-success-20 {
+  background-color: rgba(var(--success-rgb), 0.2);
+}
+.bg-success-50 {
+  background-color: rgba(var(--success-rgb), 0.5);
+}
+
+.bg-warning-10 {
+  background-color: rgba(var(--warning-rgb), 0.1);
+}
+.bg-warning-20 {
+  background-color: rgba(var(--warning-rgb), 0.2);
+}
+.bg-warning-50 {
+  background-color: rgba(var(--warning-rgb), 0.5);
+}
+
+.bg-error-10 {
+  background-color: rgba(var(--error-rgb), 0.1);
+}
+.bg-error-20 {
+  background-color: rgba(var(--error-rgb), 0.2);
+}
+.bg-error-50 {
+  background-color: rgba(var(--error-rgb), 0.5);
+}
+
+.bg-info-10 {
+  background-color: rgba(var(--info-rgb), 0.1);
+}
+.bg-info-20 {
+  background-color: rgba(var(--info-rgb), 0.2);
+}
+.bg-info-50 {
+  background-color: rgba(var(--info-rgb), 0.5);
+}
+
+/* Gradient backgrounds */
+.bg-gradient-primary {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+}
+
+.bg-gradient-accent {
+  background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+}
+
+.bg-gradient-success {
+  background: linear-gradient(135deg, var(--success), var(--info));
+}
+
+.bg-gradient-warning {
+  background: linear-gradient(135deg, var(--warning), var(--error));
+}
+
+/* Hover states */
+.hover\:bg-primary:hover {
+  background-color: var(--primary-color);
+}
+
+.hover\:bg-secondary:hover {
+  background-color: var(--secondary-color);
+}
+
+.hover\:bg-accent:hover {
+  background-color: var(--accent-color);
+}
+
+.hover\:text-primary:hover {
+  color: var(--primary-color);
+}
+
+.hover\:text-secondary:hover {
+  color: var(--secondary-color);
+}
+
+.hover\:text-accent:hover {
+  color: var(--accent-color);
+}
+
+.hover\:border-primary:hover {
+  border-color: var(--primary-color);
+}
+
+.hover\:border-secondary:hover {
+  border-color: var(--secondary-color);
+}
+
+.hover\:border-accent:hover {
+  border-color: var(--accent-color);
+}

@@ -50,6 +50,14 @@ const SustainabilityDashboard = () => {
   // Generate metrics based on current settings
   const metrics = calculateMetrics(marketPenetration);
   
+  // Chart colors using theme variables
+  const COLORS = [
+    'var(--primary-color)',
+    'var(--secondary-color)',
+    'var(--warning)',
+    'var(--accent-color)'
+  ];
+  
   // Counter animation effect
   useEffect(() => {
     // Animate the main counter value based on active tab
@@ -149,9 +157,7 @@ const SustainabilityDashboard = () => {
     { name: 'Less Refrigeration', value: 18 },
     { name: 'Other Benefits', value: 9 },
   ];
-  
-  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
-  
+
   // Format large numbers for display
   const formatNumber = (num) => {
     if (num >= 1000000000) {
@@ -174,7 +180,7 @@ const SustainabilityDashboard = () => {
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-white p-4 border border-gray-200 shadow-md rounded-md">
+        <div className="bg-blue-100 p-4 border border-border shadow-md rounded-md">
           <p className="font-bold">{label}</p>
           {payload.map((entry, index) => (
             <p key={index} style={{ color: entry.color }}>
@@ -200,7 +206,7 @@ const SustainabilityDashboard = () => {
         value = metrics.foodWasteReduction;
         label = "Food Waste Reduction";
         icon = "🍎";
-        color = "bg-green-100 text-green-800";
+        color = "bg-success-10 text-success";
         unit = "lbs";
         comparison = `Equivalent to ${formatNumber(value / 1.5)} meals saved`;
         break;
@@ -208,7 +214,7 @@ const SustainabilityDashboard = () => {
         value = metrics.co2Reduction;
         label = "CO₂ Emission Reduction";
         icon = "🌿";
-        color = "bg-blue-100 text-blue-800";
+        color = "bg-info-10 text-info";
         unit = "metric tons";
         comparison = `Equivalent to taking ${formatNumber(metrics.carsOffRoad)} cars off the road`;
         break;
@@ -216,7 +222,7 @@ const SustainabilityDashboard = () => {
         value = metrics.waterSaved;
         label = "Water Conservation";
         icon = "💧";
-        color = "bg-blue-100 text-blue-800";
+        color = "bg-info-10 text-info";
         unit = "gallons";
         comparison = `Could fill ${formatNumber(metrics.swimPools)} Olympic swimming pools`;
         break;
@@ -224,7 +230,7 @@ const SustainabilityDashboard = () => {
         value = metrics.packagingReduction;
         label = "Packaging Reduction";
         icon = "📦";
-        color = "bg-yellow-100 text-yellow-800";
+        color = "bg-warning-10 text-warning";
         unit = "packages";
         comparison = `Stacked, would reach ${formatNumber(value / 12000)} times the height of Mount Everest`;
         break;
@@ -232,13 +238,13 @@ const SustainabilityDashboard = () => {
         value = metrics.foodWasteReduction;
         label = "Food Waste Reduction";
         icon = "🍎";
-        color = "bg-green-100 text-green-800";
+        color = "bg-success-10 text-success";
         unit = "lbs";
         comparison = `Equivalent to ${formatNumber(value / 1.5)} meals saved`;
     }
     
     return (
-      <div className="text-center p-6 bg-white rounded-lg shadow-md">
+      <div className="text-center p-6 bg-blue-100 rounded-lg shadow-md">
         <div className={`inline-flex items-center justify-center p-3 ${color} rounded-full mb-4`}>
           <span className="text-2xl">{icon}</span>
         </div>
@@ -253,19 +259,24 @@ const SustainabilityDashboard = () => {
   };
   
   return (
-    <div className="max-w-6xl mx-auto bg-gray-50 p-6 rounded-xl shadow-lg">
+    <div className="w-full max-w-4xl mx-auto p-6 rounded-xl" 
+      style={{
+        background: "linear-gradient(45deg, rgba(11, 61, 145, 0.05), rgba(0, 255, 255, 0.1))",
+        boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1), 0 0 15px rgba(0, 255, 255, 0.2)",
+        border: "1px solid rgba(0, 255, 255, 0.2)"
+      }}>
       <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-gray-800 mb-2">Sustainability Impact Dashboard</h2>
+        <h2 className="text-3xl font-bold text-text mb-2">Sustainability Impact Dashboard</h2>
         <p className="text-gray-600 max-w-3xl mx-auto">
           Visualize the environmental benefits of Spanex shelf-life extension technology at various adoption levels
         </p>
       </div>
       
       {/* Controls */}
-      <div className="bg-white p-4 rounded-lg shadow-md mb-8">
+      <div className="bg-blue-100 p-4 rounded-lg shadow-md mb-8">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-text mb-1">
               Market Penetration: {marketPenetration}%
             </label>
             <input
@@ -282,24 +293,24 @@ const SustainabilityDashboard = () => {
             <button
               onClick={() => setSelectedTimeframe('monthly')}
               className={`px-4 py-2 rounded-md ${selectedTimeframe === 'monthly' 
-                ? 'bg-blue-600 text-white' 
-                : 'bg-gray-200 text-gray-700'}`}
+                ? 'bg-primary text-background' 
+                : 'bg-surface text-text'}`}
             >
               Monthly
             </button>
             <button
               onClick={() => setSelectedTimeframe('annual')}
               className={`px-4 py-2 rounded-md ${selectedTimeframe === 'annual' 
-                ? 'bg-blue-600 text-white' 
-                : 'bg-gray-200 text-gray-700'}`}
+                ? 'bg-primary text-background' 
+                : 'bg-surface text-text'}`}
             >
               Annual
             </button>
             <button
               onClick={() => setSelectedTimeframe('5year')}
               className={`px-4 py-2 rounded-md ${selectedTimeframe === '5year' 
-                ? 'bg-blue-600 text-white' 
-                : 'bg-gray-200 text-gray-700'}`}
+                ? 'bg-primary text-background' 
+                : 'bg-surface text-text'}`}
             >
               5-Year
             </button>
@@ -308,13 +319,13 @@ const SustainabilityDashboard = () => {
       </div>
       
       {/* Tab Navigation */}
-      <div className="flex flex-wrap border-b border-gray-200 mb-8">
+      <div className="flex flex-wrap border-b border-border mb-8">
         <button
           onClick={() => setActiveTab('overview')}
           className={`py-2 px-4 font-medium text-sm rounded-t-lg ${
             activeTab === 'overview' 
-              ? 'bg-white border-l border-t border-r border-gray-200 text-blue-600' 
-              : 'text-gray-500 hover:text-gray-700'
+              ? 'bg-blue-100 border-l border-t border-r border-border text-primary' 
+              : 'text-gray-500 hover:text-text'
           }`}
         >
           Overview
@@ -323,8 +334,8 @@ const SustainabilityDashboard = () => {
           onClick={() => setActiveTab('waste')}
           className={`py-2 px-4 font-medium text-sm rounded-t-lg ${
             activeTab === 'waste' 
-              ? 'bg-white border-l border-t border-r border-gray-200 text-blue-600' 
-              : 'text-gray-500 hover:text-gray-700'
+              ? 'bg-blue-100 border-l border-t border-r border-border text-primary' 
+              : 'text-gray-500 hover:text-text'
           }`}
         >
           Food Waste
@@ -333,8 +344,8 @@ const SustainabilityDashboard = () => {
           onClick={() => setActiveTab('carbon')}
           className={`py-2 px-4 font-medium text-sm rounded-t-lg ${
             activeTab === 'carbon' 
-              ? 'bg-white border-l border-t border-r border-gray-200 text-blue-600' 
-              : 'text-gray-500 hover:text-gray-700'
+              ? 'bg-blue-100 border-l border-t border-r border-border text-primary' 
+              : 'text-gray-500 hover:text-text'
           }`}
         >
           Carbon Footprint
@@ -343,8 +354,8 @@ const SustainabilityDashboard = () => {
           onClick={() => setActiveTab('water')}
           className={`py-2 px-4 font-medium text-sm rounded-t-lg ${
             activeTab === 'water' 
-              ? 'bg-white border-l border-t border-r border-gray-200 text-blue-600' 
-              : 'text-gray-500 hover:text-gray-700'
+              ? 'bg-blue-100 border-l border-t border-r border-border text-primary' 
+              : 'text-gray-500 hover:text-text'
           }`}
         >
           Water Usage
@@ -353,22 +364,21 @@ const SustainabilityDashboard = () => {
           onClick={() => setActiveTab('packaging')}
           className={`py-2 px-4 font-medium text-sm rounded-t-lg ${
             activeTab === 'packaging' 
-              ? 'bg-white border-l border-t border-r border-gray-200 text-blue-600' 
-              : 'text-gray-500 hover:text-gray-700'
+              ? 'bg-blue-100 border-l border-t border-r border-border text-primary' 
+              : 'text-gray-500 hover:text-text'
           }`}
         >
           Packaging
         </button>
       </div>
-      
       {/* Dashboard Content */}
       {activeTab === 'overview' ? (
         /* Overview Tab */
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <div className="bg-white p-4 rounded-lg shadow-md">
+          <div className="bg-blue-100 p-4 rounded-lg shadow-md">
             <div className="flex items-center mb-2">
-              <div className="bg-green-100 p-2 rounded-full mr-2">
-                <span className="text-green-600 text-lg">🍎</span>
+              <div className="bg-success-10 p-2 rounded-full mr-2">
+                <span className="text-success text-lg">🍎</span>
               </div>
               <h3 className="font-bold">Food Waste</h3>
             </div>
@@ -376,10 +386,10 @@ const SustainabilityDashboard = () => {
             <p className="text-sm text-gray-600">pounds saved from landfill</p>
           </div>
           
-          <div className="bg-white p-4 rounded-lg shadow-md">
+          <div className="bg-blue-100 p-4 rounded-lg shadow-md">
             <div className="flex items-center mb-2">
-              <div className="bg-blue-100 p-2 rounded-full mr-2">
-                <span className="text-blue-600 text-lg">🌿</span>
+              <div className="bg-info-10 p-2 rounded-full mr-2">
+                <span className="text-info text-lg">🌿</span>
               </div>
               <h3 className="font-bold">CO₂ Emissions</h3>
             </div>
@@ -387,10 +397,10 @@ const SustainabilityDashboard = () => {
             <p className="text-sm text-gray-600">metric tons reduced</p>
           </div>
           
-          <div className="bg-white p-4 rounded-lg shadow-md">
+          <div className="bg-blue-100 p-4 rounded-lg shadow-md">
             <div className="flex items-center mb-2">
-              <div className="bg-blue-100 p-2 rounded-full mr-2">
-                <span className="text-blue-600 text-lg">💧</span>
+              <div className="bg-info-10 p-2 rounded-full mr-2">
+                <span className="text-info text-lg">💧</span>
               </div>
               <h3 className="font-bold">Water Saved</h3>
             </div>
@@ -398,10 +408,10 @@ const SustainabilityDashboard = () => {
             <p className="text-sm text-gray-600">gallons conserved</p>
           </div>
           
-          <div className="bg-white p-4 rounded-lg shadow-md">
+          <div className="bg-blue-100 p-4 rounded-lg shadow-md">
             <div className="flex items-center mb-2">
-              <div className="bg-yellow-100 p-2 rounded-full mr-2">
-                <span className="text-yellow-600 text-lg">📦</span>
+              <div className="bg-warning-10 p-2 rounded-full mr-2">
+                <span className="text-warning text-lg">📦</span>
               </div>
               <h3 className="font-bold">Packaging</h3>
             </div>
@@ -416,7 +426,7 @@ const SustainabilityDashboard = () => {
             {getMainMetricDisplay()}
           </div>
           
-          <div className="md:col-span-2 bg-white p-4 rounded-lg shadow-md">
+          <div className="md:col-span-2 bg-blue-100 p-4 rounded-lg shadow-md">
             <h3 className="font-bold mb-4">Projected Impact Over Time</h3>
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
@@ -436,7 +446,7 @@ const SustainabilityDashboard = () => {
                       type="monotone" 
                       dataKey="foodWaste" 
                       name="Food Waste Saved (lbs)" 
-                      stroke="#4ade80" 
+                      stroke="var(--success)" 
                       activeDot={{ r: 8 }} 
                     />
                   )}
@@ -446,7 +456,7 @@ const SustainabilityDashboard = () => {
                       type="monotone" 
                       dataKey="co2" 
                       name="CO₂ Reduction (tons)" 
-                      stroke="#3b82f6" 
+                      stroke="var(--info)" 
                       activeDot={{ r: 8 }} 
                     />
                   )}
@@ -456,7 +466,7 @@ const SustainabilityDashboard = () => {
                       type="monotone" 
                       dataKey="water" 
                       name="Water Saved (M gallons)" 
-                      stroke="#06b6d4" 
+                      stroke="var(--info)" 
                       activeDot={{ r: 8 }} 
                     />
                   )}
@@ -466,7 +476,7 @@ const SustainabilityDashboard = () => {
                       type="monotone" 
                       dataKey="packaging" 
                       name="Packaging Reduced (M units)" 
-                      stroke="#eab308" 
+                      stroke="var(--warning)" 
                       activeDot={{ r: 8 }} 
                     />
                   )}
@@ -475,7 +485,7 @@ const SustainabilityDashboard = () => {
                     type="monotone" 
                     dataKey="penetration" 
                     name="Market Penetration (%)" 
-                    stroke="#94a3b8" 
+                    stroke="var(--border-color)" 
                     strokeDasharray="5 5" 
                   />
                 </LineChart>
@@ -487,7 +497,7 @@ const SustainabilityDashboard = () => {
       
       {/* Additional Visualizations */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-white p-4 rounded-lg shadow-md">
+        <div className="bg-blue-100 p-4 rounded-lg shadow-md">
           <h3 className="font-bold mb-4">Industry Comparison</h3>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
@@ -500,14 +510,14 @@ const SustainabilityDashboard = () => {
                 <YAxis label={{ value: 'Relative Impact (%)', angle: -90, position: 'insideLeft' }} />
                 <Tooltip />
                 <Legend />
-                <Bar dataKey="conventional" name="Without Spanex" fill="#ef4444" />
-                <Bar dataKey="spanex" name="With Spanex" fill="#22c55e" />
+                <Bar dataKey="conventional" name="Without Spanex" fill="var(--error)" />
+                <Bar dataKey="spanex" name="With Spanex" fill="var(--success)" />
               </BarChart>
             </ResponsiveContainer>
           </div>
         </div>
         
-        <div className="bg-white p-4 rounded-lg shadow-md">
+        <div className="bg-blue-100 p-4 rounded-lg shadow-md">
           <h3 className="font-bold mb-4">Carbon Footprint Reduction Breakdown</h3>
           <div className="h-64 flex items-center justify-center">
             <ResponsiveContainer width="100%" height="100%">
@@ -518,7 +528,7 @@ const SustainabilityDashboard = () => {
                   cy="50%"
                   labelLine={false}
                   outerRadius={80}
-                  fill="#8884d8"
+                  fill="var(--primary-color)"
                   dataKey="value"
                   label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
                 >
@@ -534,30 +544,30 @@ const SustainabilityDashboard = () => {
       </div>
       
       {/* Environmental Equivalents */}
-      <div className="mt-8 bg-white p-6 rounded-lg shadow-md">
+      <div className="mt-8 bg-blue-100 p-6 rounded-lg shadow-md">
         <h3 className="font-bold mb-4 text-center text-xl">Environmental Impact Equivalents</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="text-center p-4 bg-green-50 rounded-lg">
+          <div className="text-center p-4 bg-success-10 rounded-lg">
             <div className="text-4xl mb-2">🌳</div>
-            <div className="text-2xl font-bold text-green-700">{formatNumber(metrics.treesEquivalent)}</div>
+            <div className="text-2xl font-bold text-success">{formatNumber(metrics.treesEquivalent)}</div>
             <p className="text-sm text-gray-600">Trees planted for one year</p>
           </div>
           
-          <div className="text-center p-4 bg-blue-50 rounded-lg">
+          <div className="text-center p-4 bg-info-10 rounded-lg">
             <div className="text-4xl mb-2">🚗</div>
-            <div className="text-2xl font-bold text-blue-700">{formatNumber(metrics.carsOffRoad)}</div>
+            <div className="text-2xl font-bold text-info">{formatNumber(metrics.carsOffRoad)}</div>
             <p className="text-sm text-gray-600">Cars taken off the road</p>
           </div>
           
-          <div className="text-center p-4 bg-yellow-50 rounded-lg">
+          <div className="text-center p-4 bg-warning-10 rounded-lg">
             <div className="text-4xl mb-2">🏠</div>
-            <div className="text-2xl font-bold text-yellow-700">{formatNumber(metrics.homesPowered)}</div>
+            <div className="text-2xl font-bold text-warning">{formatNumber(metrics.homesPowered)}</div>
             <p className="text-sm text-gray-600">Homes powered for a year</p>
           </div>
           
-          <div className="text-center p-4 bg-blue-50 rounded-lg">
+          <div className="text-center p-4 bg-info-10 rounded-lg">
             <div className="text-4xl mb-2">🏊</div>
-            <div className="text-2xl font-bold text-blue-700">{formatNumber(metrics.swimPools)}</div>
+            <div className="text-2xl font-bold text-info">{formatNumber(metrics.swimPools)}</div>
             <p className="text-sm text-gray-600">Olympic swimming pools</p>
           </div>
         </div>
