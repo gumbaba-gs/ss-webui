@@ -1,0 +1,83 @@
+/* src/components/home/ComparisonSection.css */
+
+.comparison-section {
+    padding: var(--space-12) 0;
+    position: relative;
+    overflow: hidden;
+    
+    /* Background with image */
+    background-image: url('./images/hero-bg4.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+  }
+  
+  /* Add overlay to ensure content is readable */
+  .comparison-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.8));
+    z-index: 1;
+  }
+  
+  /* Make container appear above overlay */
+  .comparison-section .container {
+    position: relative;
+    z-index: 2;
+  }
+  
+  @media (min-width: 768px) {
+    .comparison-section {
+      padding: var(--space-16) 0;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .comparison-section {
+      padding: var(--space-24) 0;
+    }
+  }
+  
+  .section-header {
+    text-align: center;
+    margin-bottom: var(--space-8);
+  }
+  
+  .section-title {
+    color: var(--text-color);
+    margin-bottom: var(--space-3);
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  
+  .section-subtitle {
+    color: var(--text-color);
+    opacity: 0.8;
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: var(--font-size-base);
+    line-height: 1.5;
+  }
+  
+  @media (min-width: 768px) {
+    .section-title {
+      font-size: var(--font-size-3xl);
+    }
+    
+    .section-subtitle {
+      font-size: var(--font-size-lg);
+    }
+  }
+  
+  /* For high-resolution displays */
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .comparison-section {
+      background-image: url('./images/hero-bg4.jpg'); /* If you have a high-res version */
+    }
+  }

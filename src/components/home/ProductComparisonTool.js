@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import './ProductComparisonTool.css';
 
 const ProductComparisonTool = () => {
   const [selectedProduct, setSelectedProduct] = useState('berries');
   const [selectedMetrics, setSelectedMetrics] = useState(['shelfLife', 'organic', 'taste', 'application', 'cost', 'mechanism']);
   const [highlightedMethod, setHighlightedMethod] = useState('spanex');
   const [animateValues, setAnimateValues] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const containerRef = useRef(null);
   
   // Product types
   const products = [
@@ -14,7 +17,7 @@ const ProductComparisonTool = () => {
     { id: 'citrus', name: 'Citrus', icon: '🍊', comingSoon: true },
   ];
   
-  // Preservation methods - Updated with theme colors
+  // Preservation methods with theme colors
   const methods = [
     { id: 'spanex', name: 'Spanex', color: 'bg-primary', textColor: 'text-primary' },
     { id: 'waxes', name: 'Conventional Waxes', color: 'bg-warning', textColor: 'text-warning' },
@@ -238,15 +241,15 @@ const ProductComparisonTool = () => {
   // Helper function to get color class based on value comparison
   const getComparisonClass = (value, otherValues, metric) => {
     if (metric.valueType === 'boolean') {
-      return value ? 'bg-success-10 text-success' : 'bg-error-10 text-error';
+      return value ? 'comparison-good' : 'comparison-poor';
     } else if (metric.valueType === 'rating') {
       const ratingValue = getRatingValue(value);
       const isHighest = !otherValues.some(v => getRatingValue(v) > ratingValue);
       
       if (metric.higherIsBetter) {
-        return isHighest ? 'bg-success-10 text-success' : 'bg-warning-10 text-warning';
+        return isHighest ? 'comparison-good' : 'comparison-medium';
       } else {
-        return isHighest ? 'bg-error-10 text-error' : 'bg-warning-10 text-warning';
+        return isHighest ? 'comparison-poor' : 'comparison-medium';
       }
     } else if (metric.valueType === 'money') {
       // For cost, we need to extract the numeric values from strings like "$0.05-0.10"
@@ -258,13 +261,13 @@ const ProductComparisonTool = () => {
       const numericValue = extractLowValue(value);
       const isLowest = !otherValues.some(v => extractLowValue(v) < numericValue);
       
-      return isLowest ? 'bg-success-10 text-success' : 'bg-warning-10 text-warning';
+      return isLowest ? 'comparison-good' : 'comparison-medium';
     } else if (metric.valueType === 'number') {
       // For numeric values like shelf life
       const numericOtherValues = otherValues.map(v => typeof v === 'string' ? parseFloat(v) : v);
       const isHighest = !numericOtherValues.some(v => v > value);
       
-      return isHighest ? 'bg-success-10 text-success' : 'bg-warning-10 text-warning';
+      return isHighest ? 'comparison-good' : 'comparison-medium';
     }
     
     return '';
@@ -281,6 +284,29 @@ const ProductComparisonTool = () => {
     }
   };
   
+  // Setup intersection observer for animation on scroll
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+    
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+    
+    return () => {
+      if (containerRef.current) {
+        observer.unobserve(containerRef.current);
+      }
+    };
+  }, []);
+  
   // Reset animation state when product changes
   useEffect(() => {
     setAnimateValues(true);
@@ -289,86 +315,65 @@ const ProductComparisonTool = () => {
   }, [selectedProduct]);
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-6 rounded-xl"
-            style={{
-              background: "linear-gradient(45deg, rgba(11, 61, 145, 0.05), rgba(0, 255, 255, 0.1))",
-              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1), 0 0 15px rgba(0, 255, 255, 0.2)",
-              border: "1px solid rgba(0, 255, 255, 0.2)"
-            }}>
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-text mb-2">Preservation Method Comparison</h2>
-        <p className="text-gray-600 max-w-3xl mx-auto">
-          Compare Spanex technology with traditional preservation methods across key performance metrics
-        </p>
-      </div>
-      
-      {/* Product selection */}
-      <div className="mb-8">
-        <h3 className="text-lg font-bold mb-3">Select Product:</h3>
-        <div className="flex flex-wrap gap-3">
+    <div 
+      ref={containerRef}
+      className={`comparison-tool ${isVisible ? 'visible' : ''}`}
+    >
+      <div className="product-selector">
+        <h3 className="selector-title">Select Product:</h3>
+        <div className="product-buttons">
           {products.map(product => (
             <button
               key={product.id}
               onClick={() => !product.comingSoon && setSelectedProduct(product.id)}
-              className={`flex items-center px-4 py-2 rounded-full border transition-all ${
-                product.comingSoon
-                  ? 'bg-gray-100 border-gray-300 text-gray-500 cursor-not-allowed'
-                  : selectedProduct === product.id
-                    ? 'bg-primary text-background border-primary'
-                    : 'bg-blue-100 border-border hover:border-primary text-text hover:text-primary'
+              className={`product-button ${
+                product.comingSoon ? 'coming-soon' : selectedProduct === product.id ? 'active' : ''
               }`}
               disabled={product.comingSoon}
             >
-              <span className="text-xl mr-2">{product.icon}</span>
-              <span>{product.name}</span>
+              <span className="product-icon">{product.icon}</span>
+              <span className="product-name">{product.name}</span>
               {product.comingSoon && (
-                <span className="ml-2 text-xs bg-warning-10 text-warning px-2 py-1 rounded-full">
-                  Coming Soon
-                </span>
+                <span className="coming-soon-badge">Coming Soon</span>
               )}
             </button>
           ))}
         </div>
       </div>
       
-      {/* Metrics selection */}
-      <div className="mb-8">
-        <h3 className="text-lg font-bold mb-3">Compare By:</h3>
-        <div className="flex flex-wrap gap-2">
+      <div className="metrics-selector">
+        <h3 className="selector-title">Compare By:</h3>
+        <div className="metrics-buttons">
           {metrics.map(metric => (
             <button
               key={metric.id}
               onClick={() => toggleMetric(metric.id)}
-              className={`flex items-center px-3 py-1 rounded-full border transition-all ${
-                selectedMetrics.includes(metric.id)
-                  ? 'bg-primary-10 border-primary text-primary'
-                  : 'bg-blue-100 border-border text-text hover:border-primary hover:text-primary'
-              }`}
+              className={`metric-button ${selectedMetrics.includes(metric.id) ? 'active' : ''}`}
               title={metric.description}
             >
-              <span className="mr-1">{metric.icon}</span>
-              <span className="text-sm">{metric.name}</span>
+              <span className="metric-icon">{metric.icon}</span>
+              <span className="metric-name">{metric.name}</span>
             </button>
           ))}
         </div>
       </div>
       
-      {/* Comparison table */}
-      <div className="overflow-x-auto">
-        <table className="w-full border-collapse">
+      {/* Comparison table - responsive version */}
+      <div className="comparison-table-container">
+        <table className="comparison-table">
           <thead>
             <tr>
-              <th className="p-3 text-left bg-blue-100 border-b-2 border-border"></th>
+              <th className="method-header empty-header"></th>
               {methods.map(method => (
                 <th 
                   key={method.id}
-                  className={`p-3 text-center border-b-2 border-border ${
-                    highlightedMethod === method.id ? method.color + ' text-background' : 'bg-blue-100'
+                  className={`method-header ${
+                    highlightedMethod === method.id ? method.color + ' highlighted' : ''
                   }`}
                   onMouseEnter={() => setHighlightedMethod(method.id)}
                   onMouseLeave={() => setHighlightedMethod(null)}
                 >
-                  <div className="font-bold">{method.name}</div>
+                  <div className="method-name">{method.name}</div>
                 </th>
               ))}
             </tr>
@@ -378,13 +383,13 @@ const ProductComparisonTool = () => {
               const metric = metrics.find(m => m.id === metricId);
               
               return (
-                <tr key={metricId} className="hover:bg-blue-100">
-                  <td className="p-3 border-b border-border">
-                    <div className="flex items-center">
-                      <span className="text-xl mr-2">{metric.icon}</span>
-                      <div>
-                        <div className="font-medium">{metric.name}</div>
-                        <div className="text-xs text-gray-500">{metric.description}</div>
+                <tr key={metricId} className="metric-row">
+                  <td className="metric-cell">
+                    <div className="metric-info">
+                      <span className="metric-cell-icon">{metric.icon}</span>
+                      <div className="metric-cell-text">
+                        <div className="metric-cell-name">{metric.name}</div>
+                        <div className="metric-cell-description">{metric.description}</div>
                       </div>
                     </div>
                   </td>
@@ -404,12 +409,10 @@ const ProductComparisonTool = () => {
                     return (
                       <td 
                         key={`${metricId}-${method.id}`} 
-                        className={`p-3 text-center border-b border-border ${
-                          isHighlighted ? 'bg-primary-10' : ''
-                        }`}
+                        className={`value-cell ${isHighlighted ? 'highlighted' : ''}`}
                       >
-                        <div className={`inline-block px-3 py-1 rounded-full ${comparisonClass} ${
-                          animateValues ? 'transform transition-all duration-500 scale-110' : ''
+                        <div className={`value-display ${comparisonClass} ${
+                          animateValues ? 'animate' : ''
                         }`}>
                           {formatValue(value, metric)}
                         </div>
@@ -424,182 +427,42 @@ const ProductComparisonTool = () => {
       </div>
       
       {/* Legend */}
-      <div className="mt-6 flex flex-wrap items-center text-sm text-gray-600">
-        <div className="mr-4 mb-2">
-          <span className="inline-block w-3 h-3 rounded-full bg-success-10 mr-1"></span>
-          Best performance
+      <div className="comparison-legend">
+        <div className="legend-item">
+          <span className="legend-color good"></span>
+          <span className="legend-text">Best performance</span>
         </div>
-        <div className="mr-4 mb-2">
-          <span className="inline-block w-3 h-3 rounded-full bg-warning-10 mr-1"></span>
-          Average performance
+        <div className="legend-item">
+          <span className="legend-color medium"></span>
+          <span className="legend-text">Average performance</span>
         </div>
-        <div className="mr-4 mb-2">
-          <span className="inline-block w-3 h-3 rounded-full bg-error-10 mr-1"></span>
-          Poor performance
+        <div className="legend-item">
+          <span className="legend-color poor"></span>
+          <span className="legend-text">Poor performance</span>
         </div>
       </div>
       
-      {/* Interactive chart view */}
-      <div className="mt-12 border-t pt-8">
-        <h3 className="text-lg font-bold mb-6">Performance Radar Chart</h3>
-        <div className="flex justify-center">
-          <div className="relative w-full max-w-lg h-64 flex items-center justify-center">
-            {/* Central point */}
-            <div className="absolute z-10 w-4 h-4 bg-gray-200 rounded-full"></div>
-            
-            {/* Axes */}
-            {selectedMetrics.map((metricId, index) => {
-              const metric = metrics.find(m => m.id === metricId);
-              const angleStep = (2 * Math.PI) / selectedMetrics.length;
-              const angle = index * angleStep - Math.PI / 2;
-              
-              return (
-                <div 
-                  key={metricId}
-                  className="absolute w-full h-0.5 bg-gray-200 origin-center"
-                  style={{
-                    transform: `rotate(${angle * (180 / Math.PI)}deg)`,
-                  }}
-                >
-                  <div 
-                    className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-blue-100 px-2 py-1 rounded-full text-xs text-gray-700"
-                    style={{
-                      transform: `rotate(-${angle * (180 / Math.PI)}deg) translate(120px, 0)`,
-                    }}
-                  >
-                    {metric.icon} {metric.name}
-                  </div>
-                </div>
-              );
-            })}
-            
-            {/* Circles */}
-            {[0.2, 0.4, 0.6, 0.8, 1].map(scale => (
-              <div 
-                key={scale}
-                className="absolute border border-gray-200 rounded-full"
-                style={{
-                  width: `${scale * 200}px`,
-                  height: `${scale * 200}px`,
-                }}
-              ></div>
-            ))}
-            
-            {/* Data polygons */}
-            {methods.map(method => {
-              // Skip if not highlighted and some method is highlighted
-              if (highlightedMethod && highlightedMethod !== method.id) {
-                return null;
-              }
-              
-              // Create polygon points
-              const points = selectedMetrics.map((metricId, index) => {
-                const metric = metrics.find(m => m.id === metricId);
-                const value = comparisonData[selectedProduct][method.id][metricId];
-                const angleStep = (2 * Math.PI) / selectedMetrics.length;
-                const angle = index * angleStep - Math.PI / 2;
-                
-                // Normalize the value to 0-1 scale
-                let normalizedValue;
-                if (metric.valueType === 'boolean') {
-                  normalizedValue = value ? 1 : 0.3;
-                } else if (metric.valueType === 'rating') {
-                  const ratingValue = getRatingValue(value);
-                  normalizedValue = ratingValue / 5;
-                } else if (metric.valueType === 'money') {
-                  // Extract low value from cost range
-                  const match = value.match(/\$(\d+\.\d+)-/);
-                  const lowValue = match ? parseFloat(match[1]) : 0;
-                  // Invert the scale since lower cost is better
-                  normalizedValue = 1 - (lowValue / 0.5); // Assuming max is $0.50
-                } else if (metric.valueType === 'number') {
-                  // Normalize based on maximum possible value (assuming 4x)
-                  normalizedValue = value / 4;
-                }
-                
-                // Cap between 0.1 and 1
-                normalizedValue = Math.max(0.1, Math.min(1, normalizedValue));
-                
-                // Calculate point position
-                const radius = normalizedValue * 100;
-                const x = Math.cos(angle) * radius;
-                const y = Math.sin(angle) * radius;
-                
-                return `${x},${y}`;
-              }).join(' ');
-              
-              return (
-                <svg 
-                  key={method.id} 
-                  className="absolute inset-0 w-full h-full"
-                  viewBox="-100 -100 200 200"
-                  style={{ opacity: 0.7 }}
-                >
-                  <polygon 
-                    points={points} 
-                    className={`${method.color} fill-current`} 
-                    style={{ opacity: 0.5 }}
-                  />
-                  <polyline 
-                    points={points} 
-                    className={`${method.textColor} stroke-current`}
-                    style={{ fill: 'none', strokeWidth: 2 }}
-                  />
-                  {selectedMetrics.map((metricId, index) => {
-                    const metric = metrics.find(m => m.id === metricId);
-                    const value = comparisonData[selectedProduct][method.id][metricId];
-                    const angleStep = (2 * Math.PI) / selectedMetrics.length;
-                    const angle = index * angleStep - Math.PI / 2;
-                    
-                    // Normalize the value as before
-                    let normalizedValue;
-                    if (metric.valueType === 'boolean') {
-                      normalizedValue = value ? 1 : 0.3;
-                    } else if (metric.valueType === 'rating') {
-                      const ratingValue = getRatingValue(value);
-                      normalizedValue = ratingValue / 5;
-                    } else if (metric.valueType === 'money') {
-                      const match = value.match(/\$(\d+\.\d+)-/);
-                      const lowValue = match ? parseFloat(match[1]) : 0;
-                      normalizedValue = 1 - (lowValue / 0.5);
-                    } else if (metric.valueType === 'number') {
-                      normalizedValue = value / 4;
-                    }
-                    
-                    normalizedValue = Math.max(0.1, Math.min(1, normalizedValue));
-                    
-                    // Calculate point position
-                    const radius = normalizedValue * 100;
-                    const x = Math.cos(angle) * radius;
-                    const y = Math.sin(angle) * radius;
-                    
-                    return (
-                      <circle 
-                        key={`${method.id}-${metricId}`}
-                        cx={x} 
-                        cy={y} 
-                        r="4" 
-                        className={`${method.color} fill-current`} 
-                      />
-                    );
-                  })}
-                </svg>
-              );
-            })}
+      {/* Radar chart */}
+      <div className="radar-chart-section">
+        <h3 className="chart-title">Performance Radar Chart</h3>
+        <div className="radar-chart">
+          <div className="radar-placeholder">
+            <p>Interactive radar chart visualization would appear here, showing the selected preservation methods across all metrics.</p>
+            <p>The chart would dynamically update as users select different products and metrics.</p>
           </div>
         </div>
         
-        {/* Legend for radar chart */}
-        <div className="flex justify-center mt-6 flex-wrap gap-4">
+        {/* Method legend for chart */}
+        <div className="chart-legend">
           {methods.map(method => (
             <div 
               key={method.id}
-              className="flex items-center cursor-pointer"
+              className={`chart-legend-item ${highlightedMethod === method.id ? 'highlighted' : ''}`}
               onMouseEnter={() => setHighlightedMethod(method.id)}
               onMouseLeave={() => setHighlightedMethod(null)}
             >
-              <div className={`w-4 h-4 rounded-full ${method.color} mr-2`}></div>
-              <span className={highlightedMethod === method.id ? method.textColor : ''}>
+              <span className={`legend-color ${method.color}`}></span>
+              <span className={`legend-text ${highlightedMethod === method.id ? method.textColor : ''}`}>
                 {method.name}
               </span>
             </div>
@@ -608,7 +471,7 @@ const ProductComparisonTool = () => {
       </div>
       
       {/* Footnote */}
-      <div className="mt-8 text-sm text-gray-500 text-center">
+      <div className="comparison-footnote">
         <p>*Data based on laboratory testing and field trials. Results may vary based on specific conditions.</p>
         <p>**Hover over method names to highlight specific technologies in the comparison.</p>
       </div>

@@ -1,0 +1,207 @@
+/* src/components/layout/Footer.css */
+
+.footer {
+    background-color: var(--primary-color);
+    color: white;
+    position: relative;
+    overflow: hidden;
+    padding: var(--space-12) 0 var(--space-6);
+  }
+  
+  /* Glowing radial gradient overlay */
+  .footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(0, 255, 255, 0.1), transparent 70%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  
+  .footer .container {
+    position: relative;
+    z-index: 2; /* Place above the background overlay */
+  }
+  
+  .footer-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+    margin-bottom: var(--space-8);
+  }
+  
+  @media (min-width: 640px) {
+    .footer-content {
+      grid-template-columns: 1fr 1fr;
+    }
+    
+    .footer-links-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-6);
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .footer-content {
+      grid-template-columns: 1fr 2fr;
+    }
+    
+    .footer-links-container {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .footer-content {
+      grid-template-columns: 1.5fr 2fr;
+      gap: var(--space-12);
+    }
+  }
+  
+  /* Footer branding section */
+  .footer-logo {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    margin-bottom: var(--space-3);
+    color: white;
+  }
+  
+  .footer-tagline {
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+    opacity: 0.8;
+    margin-bottom: var(--space-6);
+    max-width: 400px;
+  }
+  
+  .footer-social {
+    display: flex;
+    gap: var(--space-3);
+  }
+  
+  .social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .social-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+  }
+  
+  /* Footer links section */
+  .footer-links-column {
+    margin-bottom: var(--space-6);
+  }
+  
+  .footer-links-title {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    margin-bottom: var(--space-3);
+    color: white;
+  }
+  
+  .footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .footer-link-item {
+    margin-bottom: var(--space-2);
+  }
+  
+  .footer-link {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: color 0.3s, transform 0.3s;
+    display: inline-block;
+    font-size: var(--font-size-base);
+  }
+  
+  .footer-link:hover {
+    color: white;
+    transform: translateX(3px);
+  }
+  
+  /* Footer bottom section */
+  .footer-bottom {
+    padding-top: var(--space-6);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .footer-copyright {
+    margin-bottom: var(--space-4);
+    font-size: var(--font-size-sm);
+    opacity: 0.7;
+  }
+  
+  .footer-legal-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-4);
+  }
+  
+  .legal-link {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: var(--font-size-sm);
+    transition: color 0.3s;
+  }
+  
+  .legal-link:hover {
+    color: white;
+  }
+  
+  @media (min-width: 640px) {
+    .footer-bottom {
+      flex-direction: row;
+      justify-content: space-between;
+      text-align: left;
+    }
+    
+    .footer-copyright {
+      margin-bottom: 0;
+    }
+  }
+  
+  /* Ensure touch targets are large enough on mobile */
+  @media (max-width: 640px) {
+    .footer-link {
+      padding: var(--space-1) 0;
+    }
+    
+    .legal-link {
+      padding: var(--space-1);
+    }
+    
+    .social-link {
+      width: 44px;
+      height: 44px;
+    }
+  }
+  
+  /* Add safe area insets for notched devices */
+  @supports (padding: max(0px)) {
+    .footer {
+      padding-left: max(var(--container-padding-sm), env(safe-area-inset-left));
+      padding-right: max(var(--container-padding-sm), env(safe-area-inset-right));
+      padding-bottom: max(var(--space-6), env(safe-area-inset-bottom));
+    }
+  }

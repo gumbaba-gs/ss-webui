@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import './App.css';
+import './responsive.css'; // Import the new responsive styles
 
 // Import Components
 import Navbar from './components/layout/Navbar';
@@ -25,6 +26,12 @@ function App() {
     script.async = true;
     document.body.appendChild(script);
 
+    // Add viewport meta tag to ensure proper scaling on mobile devices
+    const metaViewport = document.createElement('meta');
+    metaViewport.name = 'viewport';
+    metaViewport.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover';
+    document.head.appendChild(metaViewport);
+
     // Smooth scrolling for anchor links
     const handleAnchorClick = (e) => {
       const target = e.target.closest('a[href^="#"]');
@@ -36,8 +43,11 @@ function App() {
 
       const targetElement = document.querySelector(targetId);
       if (targetElement) {
+        const navbarHeight = document.querySelector('nav')?.offsetHeight || 100;
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+        
         window.scrollTo({
-          top: targetElement.offsetTop - 100,
+          top: targetPosition - navbarHeight,
           behavior: 'smooth'
         });
       }
@@ -45,27 +55,37 @@ function App() {
 
     document.addEventListener('click', handleAnchorClick);
 
+    // Detect touch devices and add class to body
+    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+      document.body.classList.add('touch-device');
+    }
+
     return () => {
       document.removeEventListener('click', handleAnchorClick);
       document.body.removeChild(script);
+      document.head.removeChild(metaViewport);
     };
   }, []);
 
   return (
-    <div className="App font-sans bg-gray-50">
-      <Navbar />
-      <HeroSection />
-      <FoodWasteCounter />
-      <AboutSection />
-      <TechnologySection />
-      <BeforeAfterComparison />
-      <ComparisonSection />
-      <SustainabilitySection />
-      <ProductsSection />
-      <TeamSection />
-      <ContactSection />
-      <Footer />
-    </div>
+    <ThemeProvider>
+      <div className="App font-sans bg-surface text-text">
+        <Navbar />
+        <main>
+          <HeroSection />
+          <FoodWasteCounter />
+          <AboutSection />
+          <TechnologySection />
+          <BeforeAfterComparison />
+          <ComparisonSection />
+          <SustainabilitySection />
+          <ProductsSection />
+          <TeamSection />
+          <ContactSection />
+        </main>
+        <Footer />
+      </div>
+    </ThemeProvider>
   );
 }
 

@@ -1,0 +1,383 @@
+/* src/components/home/MechanismDiagram.css */
+
+.mechanism-diagram {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: var(--space-4);
+    border-radius: var(--space-3);
+    background: linear-gradient(45deg, rgba(11, 61, 145, 0.05), rgba(0, 255, 255, 0.1));
+    box-shadow: 0 var(--space-1) var(--space-4) rgba(0, 0, 0, 0.1), 0 0 var(--space-4) rgba(0, 255, 255, 0.2);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    font-family: 'Courier New', monospace;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .mechanism-diagram.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  @media (min-width: 768px) {
+    .mechanism-diagram {
+      padding: var(--space-6);
+    }
+  }
+  
+  /* Controls */
+  .mechanism-controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-6);
+  }
+  
+  .control-button {
+    padding: 0.75rem 1rem;
+    border-radius: 9999px;
+    border: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    min-width: 120px;
+    transition: background-color 0.3s, transform 0.3s;
+    background-color: var(--primary-color);
+    color: white;
+  }
+  
+  .control-button.active-rotate {
+    background-color: var(--error);
+  }
+  
+  .control-button.reset {
+    background-color: var(--text-color);
+  }
+  
+  .control-button:hover {
+    transform: translateY(-2px);
+  }
+  
+  @media (min-width: 640px) {
+    .control-button {
+      font-size: 1rem;
+      padding: 0.75rem 1.25rem;
+    }
+  }
+  
+  /* Mechanism container - the 3D display area */
+  .mechanism-container {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    margin-bottom: var(--space-6);
+    cursor: grab;
+    touch-action: none; /* Prevent default touch actions */
+    perspective: 1000px;
+  }
+  
+  .mechanism-container:active {
+    cursor: grabbing;
+  }
+  
+  @media (min-width: 640px) {
+    .mechanism-container {
+      height: 350px;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .mechanism-container {
+      height: 400px;
+    }
+  }
+  
+  /* Center berry */
+  .center-berry {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, var(--primary-color), var(--primary-color));
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    box-shadow: 0 var(--space-1) var(--space-3) rgba(0, 0, 0, 0.3), 0 0 var(--space-4) var(--accent-color);
+    border: 2px solid var(--primary-color);
+  }
+  
+  .center-label {
+    color: white;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-align: center;
+    line-height: 1.2;
+  }
+  
+  @media (min-width: 640px) {
+    .center-berry {
+      width: 90px;
+      height: 90px;
+    }
+    
+    .center-label {
+      font-size: 0.875rem;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .center-berry {
+      width: 100px;
+      height: 100px;
+    }
+    
+    .center-label {
+      font-size: 1rem;
+    }
+  }
+  
+  /* Orbiting mechanisms */
+  .mechanism-orbit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    transform-style: preserve-3d;
+    will-change: transform;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 var(--space-1) var(--space-2) rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: border-color 0.3s;
+  }
+  
+  .mechanism-orbit:hover {
+    border-color: rgba(255, 255, 255, 0.7);
+  }
+  
+  .mechanism-orbit.active {
+    border-color: white;
+    box-shadow: 0 var(--space-1) var(--space-3) rgba(0, 0, 0, 0.3), 0 0 var(--space-4) rgba(255, 255, 255, 0.4);
+  }
+  
+  @media (min-width: 640px) {
+    .mechanism-orbit {
+      width: 70px;
+      height: 70px;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .mechanism-orbit {
+      width: 80px;
+      height: 80px;
+    }
+  }
+  
+  .mechanism-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    width: 100%;
+    height: 100%;
+    padding: var(--space-1);
+    text-align: center;
+  }
+  
+  .mechanism-icon {
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .mechanism-title {
+    font-size: 0.5rem;
+    font-weight: 600;
+    line-height: 1.1;
+    max-width: 90%;
+  }
+  
+  @media (min-width: 640px) {
+    .mechanism-icon {
+      font-size: 1.5rem;
+    }
+    
+    .mechanism-title {
+      font-size: 0.65rem;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .mechanism-icon {
+      font-size: 1.75rem;
+    }
+    
+    .mechanism-title {
+      font-size: 0.75rem;
+    }
+  }
+  
+  /* Detail panel */
+  .mechanism-details {
+    background-color: white;
+    border-radius: var(--space-2);
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.5s ease, opacity 0.3s ease;
+    border: 1px solid var(--border-color);
+    margin-bottom: var(--space-6);
+  }
+  
+  .mechanism-details.active {
+    max-height: 500px;
+    opacity: 1;
+  }
+  
+  .details-content {
+    padding: var(--space-4);
+  }
+  
+  .details-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--space-3);
+  }
+  
+  .details-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin-right: var(--space-3);
+  }
+  
+  .details-title {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--text-color);
+  }
+  
+  .details-description {
+    color: var(--text-color);
+    margin-bottom: var(--space-4);
+    line-height: 1.5;
+  }
+  
+  .details-section {
+    margin-bottom: var(--space-4);
+  }
+  
+  .section-title {
+    font-weight: 600;
+    margin-bottom: var(--space-2);
+    color: var(--text-color);
+  }
+  
+  .details-list {
+    padding-left: var(--space-5);
+    margin: 0;
+  }
+  
+  .details-item {
+    margin-bottom: var(--space-1);
+    color: var(--text-color);
+  }
+  
+  .details-section.ingredients {
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--border-color);
+  }
+  
+  .ingredients-text {
+    color: var(--text-color);
+    margin: 0;
+  }
+  
+  /* Counter bars - same as in other components for consistency */
+  .counter-bars {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-1);
+    margin-top: var(--space-4);
+  }
+  
+  .counter-bar {
+    height: 8px;
+    width: 24px;
+    background: rgba(0, 255, 255, 0.1);
+    border-radius: 4px;
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    box-shadow: 0 0 5px rgba(0, 255, 255, 0.1);
+  }
+  
+  .counter-bar.active {
+    background: linear-gradient(to right, var(--secondary-color), var(--accent-color));
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+    border: 1px solid rgba(0, 255, 255, 0.5);
+  }
+  
+  @media (min-width: 640px) {
+    .counter-bar {
+      width: 30px;
+    }
+  }
+  
+  .mechanism-instructions {
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--text-color);
+    opacity: 0.7;
+    margin-top: var(--space-3);
+  }
+  
+  @media (min-width: 640px) {
+    .mechanism-instructions {
+      font-size: 0.875rem;
+    }
+  }
+  
+  /* Theme color classes for the mechanisms */
+  .bg-primary {
+    background-color: var(--primary-color);
+  }
+  
+  .bg-secondary {
+    background-color: var(--secondary-color);
+  }
+  
+  .bg-success {
+    background-color: var(--success);
+  }
+  
+  .bg-info {
+    background-color: var(--info);
+  }
+  
+  /* Animation for initial display */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }

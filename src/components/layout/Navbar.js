@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ThemeToggle from '../common/ThemeToggle';
+import './Navbar.css'; // We'll create this file for navbar-specific styles
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const mobileMenuRef = useRef(null);
+  const hamburgerRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -14,80 +17,170 @@ const Navbar = () => {
       }
     };
 
+    // Handle clicks outside mobile menu to close it
+    const handleClickOutside = (event) => {
+      if (
+        isMobileMenuOpen &&
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(event.target) &&
+        hamburgerRef.current &&
+        !hamburgerRef.current.contains(event.target)
+      ) {
+        setIsMobileMenuOpen(false);
+        document.body.classList.remove('menu-open');
+      }
+    };
+
+    // Handle escape key to close mobile menu
+    const handleEscKey = (event) => {
+      if (event.key === 'Escape' && isMobileMenuOpen) {
+        setIsMobileMenuOpen(false);
+        document.body.classList.remove('menu-open');
+      }
+    };
+
     window.addEventListener('scroll', handleScroll);
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleEscKey);
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleEscKey);
     };
-  }, []);
+  }, [isMobileMenuOpen]);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
+    
+    // Toggle body scroll lock when menu is open
     if (!isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.classList.add('menu-open');
     } else {
-      document.body.style.overflow = '';
+      document.body.classList.remove('menu-open');
     }
   };
 
+  const closeMenu = () => {
+    setIsMobileMenuOpen(false);
+    document.body.classList.remove('menu-open');
+  };
+
+  // Menu items to keep them DRY
+  const menuItems = [
+    { href: "#about", text: "About" },
+    { href: "#products", text: "Products" },
+    { href: "#technology", text: "Technology" },
+    { href: "#team", text: "Team" },
+    { href: "#contact", text: "Contact" }
+  ];
+
   return (
-    <>
-      {/* Navbar */}
-      <nav className={`bg-surface text-text py-4 px-6 ${isScrolled ? 'scrolled' : ''} fixed w-full z-50 shadow-lg`}>
-        <div className="container mx-auto flex justify-between items-center">
-          <a href="#" className="flex items-center">
-            <span className="text-2xl font-bold logo-text text-text">
+    <header className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
+      <div className="container">
+        <div className="navbar-content">
+          {/* Logo */}
+          <a href="#" className="logo" aria-label="Spanex Sciences Homepage">
+            <span className="logo-text">
               Span<span className="text-accent">ex</span>{' '}
               <span className="text-secondary">Sciences</span>
             </span>
           </a>
 
-          <div className="hidden md:flex space-x-8">
-            <a href="#about" className="nav-link">About</a>
-            <a href="#products" className="nav-link">Products</a>
-            <a href="#technology" className="nav-link">Technology</a>
-            <a href="#team" className="nav-link">Team</a>
-            <a href="#contact" className="nav-link">Contact</a>
+          {/* Desktop Navigation */}
+          <nav className="nav-desktop">
+            <ul className="nav-links">
+              {menuItems.map((item, index) => (
+                <li key={index} className="nav-item">
+                  <a href={item.href} className="nav-link">{item.text}</a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          {/* Theme Toggle */}
+          <div className="theme-toggle-container">
+            <ThemeToggle />
           </div>
 
+          {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-text focus:outline-none"
+            ref={hamburgerRef}
+            className={`hamburger ${isMobileMenuOpen ? 'active' : ''}`}
             onClick={toggleMobileMenu}
+            aria-label="Toggle mobile menu"
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-menu"
           >
-            <i className="fas fa-bars text-2xl"></i>
+            <span className="hamburger-line"></span>
+            <span className="hamburger-line"></span>
+            <span className="hamburger-line"></span>
           </button>
         </div>
-      </nav>
+      </div>
 
-      {/* Mobile Menu */}
-      <div className={`mobile-menu ${isMobileMenuOpen ? 'active' : ''}`}>
-        <div className="p-6">
-          <div className="flex justify-between items-center mb-8">
-            <span className="text-2xl font-bold text-text">
+      {/* Mobile Menu Drawer */}
+      <div 
+        id="mobile-menu"
+        ref={mobileMenuRef}
+        className={`mobile-menu ${isMobileMenuOpen ? 'active' : ''}`}
+        aria-hidden={!isMobileMenuOpen}
+      >
+        <div className="mobile-menu-content">
+          <div className="mobile-menu-header">
+            <span className="logo-text">
               Span<span className="text-accent">ex</span>{' '}
               <span className="text-secondary">Sciences</span>
             </span>
             <button
-              className="focus:outline-none"
-              onClick={toggleMobileMenu}
+              className="mobile-menu-close"
+              onClick={closeMenu}
+              aria-label="Close mobile menu"
             >
-              <i className="fas fa-times text-2xl"></i>
+              <i className="fas fa-times"></i>
             </button>
           </div>
 
-          <div className="flex flex-col space-y-4">
-            <a href="#about" className="py-2 px-4 hover:bg-surface rounded-lg text-text" onClick={toggleMobileMenu}>About</a>
-            <a href="#products" className="py-2 px-4 hover:bg-surface rounded-lg text-text" onClick={toggleMobileMenu}>Products</a>
-            <a href="#technology" className="py-2 px-4 hover:bg-surface rounded-lg text-text" onClick={toggleMobileMenu}>Technology</a>
-            <a href="#team" className="py-2 px-4 hover:bg-surface rounded-lg text-text" onClick={toggleMobileMenu}>Team</a>
-            <a href="#contact" className="py-2 px-4 hover:bg-surface rounded-lg text-text" onClick={toggleMobileMenu}>Contact</a>
+          <nav className="mobile-nav">
+            <ul className="mobile-nav-links">
+              {menuItems.map((item, index) => (
+                <li key={index} className="mobile-nav-item">
+                  <a 
+                    href={item.href} 
+                    className="mobile-nav-link"
+                    onClick={closeMenu}
+                  >
+                    {item.text}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <div className="mobile-menu-footer">
+            <ThemeToggle />
+            <div className="mobile-social-links">
+              <a href="#" aria-label="LinkedIn" className="mobile-social-link">
+                <i className="fab fa-linkedin-in"></i>
+              </a>
+              <a href="#" aria-label="Twitter" className="mobile-social-link">
+                <i className="fab fa-twitter"></i>
+              </a>
+              <a href="#" aria-label="Contact us" className="mobile-social-link">
+                <i className="fas fa-envelope"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>
+
+      {/* Mobile Menu Overlay */}
       <div 
         className={`menu-overlay ${isMobileMenuOpen ? 'active' : ''}`} 
-        onClick={toggleMobileMenu}
+        onClick={closeMenu}
+        aria-hidden="true"
       ></div>
-    </>
+    </header>
   );
 };
 

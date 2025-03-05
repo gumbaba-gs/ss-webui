@@ -1,134 +1,125 @@
 import React from 'react';
+import './ProductsSection.css';
 
 const ProductsSection = () => {
+  // Array of product data for easier maintenance
+  const products = [
+    {
+      id: 'berry-fresh',
+      name: 'Berry Fresh',
+      image: 'https://placehold.co/400x300/1a5e63/ffffff?text=Berry+Fresh',
+      badge: 'Organic',
+      badgeType: 'organic',
+      description: 'Our specialized formulation for all varieties of berries, extending shelf life by 3-4x while maintaining color, texture, and flavor.',
+      shelfLife: '3-4X',
+      application: 'Spray or Dip',
+      dilution: '1:1000',
+      available: true
+    },
+    {
+      id: 'apple-shield',
+      name: 'Apple Shield',
+      image: 'https://placehold.co/400x300/1a5e63/ffffff?text=Apple+Shield',
+      badge: 'Organic',
+      badgeType: 'organic',
+      description: 'Specially formulated for apples, prevents browning and maintains crispness for weeks longer than untreated fruit.',
+      shelfLife: '2-3X',
+      application: 'Spray',
+      dilution: '1:1000',
+      available: true
+    },
+    {
+      id: 'leafy-green',
+      name: 'Leafy Green Preserver',
+      image: 'https://placehold.co/400x300/1a5e63/ffffff?text=Leafy+Green',
+      badge: 'Standard',
+      badgeType: 'standard',
+      description: 'Advanced formulation for lettuce, spinach, and other leafy greens to prevent wilting and yellowing.',
+      shelfLife: '2-3X',
+      application: 'Spray or Mist',
+      availableFrom: 'Q2 2025',
+      available: false
+    }
+  ];
+
   return (
-    <section id="products" className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800">Our Products</h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+    <section className="products-section" id="products">
+      <div className="container">
+        <div className="section-header">
+          <h2 className="section-title">Our Products</h2>
+          <p className="section-subtitle">
             Revolutionary shelf-life extension formulations for various fruits and vegetables.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div className="product-card bg-white overflow-hidden shadow-lg">
+        <div className="products-grid">
+          {products.map((product) => (
             <div 
-              className="h-48 bg-cover bg-center" 
-              style={{ backgroundImage: "url('https://placehold.co/400x300/1a5e63/ffffff?text=Berry+Fresh')" }}
-            ></div>
-            <div className="p-6">
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="text-xl font-bold">Berry Fresh</h3>
-                <span className="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">Organic</span>
+              key={product.id} 
+              className={`product-card ${!product.available ? 'coming-soon' : ''}`}
+            >
+              {!product.available && (
+                <div className="coming-soon-badge">Coming Soon</div>
+              )}
+              
+              <div className="product-image-container">
+                <img src={product.image} alt={product.name} className="product-image" loading="lazy" />
               </div>
-              <p className="text-gray-600 mb-4">
-                Our specialized formulation for all varieties of berries, extending shelf life by 3-4x while maintaining color, texture, and flavor.
-              </p>
-              <div className="border-t pt-4">
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-500">Shelf Life Extension:</span>
-                  <span className="font-semibold">3-4X</span>
+              
+              <div className="product-content">
+                <div className="product-header">
+                  <h3 className="product-title">{product.name}</h3>
+                  <span className={`product-badge ${product.badgeType}`}>
+                    {product.badge}
+                  </span>
                 </div>
-                <div className="flex justify-between text-sm mt-1">
-                  <span className="text-gray-500">Application:</span>
-                  <span className="font-semibold">Spray or Dip</span>
+                
+                <p className="product-description">{product.description}</p>
+                
+                <div className="product-specs">
+                  {product.shelfLife && (
+                    <div className="product-spec">
+                      <span className="spec-label">Shelf Life Extension:</span>
+                      <span className="spec-value">{product.shelfLife}</span>
+                    </div>
+                  )}
+                  
+                  {product.application && (
+                    <div className="product-spec">
+                      <span className="spec-label">Application:</span>
+                      <span className="spec-value">{product.application}</span>
+                    </div>
+                  )}
+                  
+                  {product.dilution && (
+                    <div className="product-spec">
+                      <span className="spec-label">Dilution Ratio:</span>
+                      <span className="spec-value">{product.dilution}</span>
+                    </div>
+                  )}
+                  
+                  {product.availableFrom && (
+                    <div className="product-spec">
+                      <span className="spec-label">Available From:</span>
+                      <span className="spec-value">{product.availableFrom}</span>
+                    </div>
+                  )}
                 </div>
-                <div className="flex justify-between text-sm mt-1">
-                  <span className="text-gray-500">Dilution Ratio:</span>
-                  <span className="font-semibold">1:1000</span>
-                </div>
+                
+                <a 
+                  href={product.available ? `#${product.id}` : undefined} 
+                  className={`product-cta ${!product.available ? 'disabled' : ''}`}
+                  aria-disabled={!product.available}
+                >
+                  {product.available ? 'Learn More' : 'Coming Soon'}
+                </a>
               </div>
-              <a 
-                href="#" 
-                className="block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg mt-6 transition duration-300"
-              >
-                Learn More
-              </a>
             </div>
-          </div>
-
-          <div className="product-card bg-white overflow-hidden shadow-lg">
-            <div 
-              className="h-48 bg-cover bg-center" 
-              style={{ backgroundImage: "url('https://placehold.co/400x300/1a5e63/ffffff?text=Apple+Shield')" }}
-            ></div>
-            <div className="p-6">
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="text-xl font-bold">Apple Shield</h3>
-                <span className="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">Organic</span>
-              </div>
-              <p className="text-gray-600 mb-4">
-                Specially formulated for apples, prevents browning and maintains crispness for weeks longer than untreated fruit.
-              </p>
-              <div className="border-t pt-4">
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-500">Shelf Life Extension:</span>
-                  <span className="font-semibold">2-3X</span>
-                </div>
-                <div className="flex justify-between text-sm mt-1">
-                  <span className="text-gray-500">Application:</span>
-                  <span className="font-semibold">Spray</span>
-                </div>
-                <div className="flex justify-between text-sm mt-1">
-                  <span className="text-gray-500">Dilution Ratio:</span>
-                  <span className="font-semibold">1:1000</span>
-                </div>
-              </div>
-              <a 
-                href="#" 
-                className="block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg mt-6 transition duration-300"
-              >
-                Learn More
-              </a>
-            </div>
-          </div>
-
-          <div className="product-card bg-white overflow-hidden shadow-lg relative">
-            <div className="absolute top-4 right-4 bg-yellow-400 text-yellow-900 text-xs font-bold py-1 px-3 rounded-full">
-              Coming Soon
-            </div>
-            <div 
-              className="h-48 bg-cover bg-center" 
-              style={{ backgroundImage: "url('https://placehold.co/400x300/1a5e63/ffffff?text=Leafy+Green')" }}
-            ></div>
-            <div className="p-6">
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="text-xl font-bold">Leafy Green Preserver</h3>
-                <span className="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">Standard</span>
-              </div>
-              <p className="text-gray-600 mb-4">
-                Advanced formulation for lettuce, spinach, and other leafy greens to prevent wilting and yellowing.
-              </p>
-              <div className="border-t pt-4">
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-500">Shelf Life Extension:</span>
-                  <span className="font-semibold">2-3X</span>
-                </div>
-                <div className="flex justify-between text-sm mt-1">
-                  <span className="text-gray-500">Application:</span>
-                  <span className="font-semibold">Spray or Mist</span>
-                </div>
-                <div className="flex justify-between text-sm mt-1">
-                  <span className="text-gray-500">Available From:</span>
-                  <span className="font-semibold">Q2 2025</span>
-                </div>
-              </div>
-              <a 
-                href="#" 
-                className="block text-center bg-gray-400 text-white font-bold py-2 px-4 rounded-lg mt-6 cursor-not-allowed"
-              >
-                Coming Soon
-              </a>
-            </div>
-          </div>
+          ))}
         </div>
 
-        <div className="text-center mt-12">
-          <a 
-            href="#contact" 
-            className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full transition duration-300"
-          >
+        <div className="products-cta-container">
+          <a href="#contact" className="products-cta">
             Request Product Information
           </a>
         </div>

@@ -1,13 +1,14 @@
 import React from 'react';
 import SustainabilityDashboard from './SustainabilityDashboard';
+import './SustainabilitySection.css';
 
 const SustainabilitySection = () => {
   return (
-    <section className="py-20 bg-white">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800">Environmental Impact</h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+    <section className="sustainability-section" id="impact">
+      <div className="container">
+        <div className="section-header">
+          <h2 className="section-title">Environmental Impact</h2>
+          <p className="section-subtitle">
             Explore how Spanex technology reduces food waste, carbon emissions, water usage, and packaging
           </p>
         </div>
