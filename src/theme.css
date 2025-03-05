@@ -1,59 +1,53 @@
 :root {
-  /* Light Theme */
-  --light-primary: #0B3D91;
-  --light-secondary: #008080;
-  --light-accent: #00FFFF;
-  --light-background: #ffffff;
-  --light-text: #1e293b;
-  --light-surface: #f8fafc;
-  --light-border: #cbd5e1;
+  /* Color Palette #4531 */
+  --dark-green: #3F6358;
+  --teal-gray: #8A9994;
+  --tan-beige: #FCE2AD;
+  --ochre-mustard: #E8B100;
+  --olive-green: #536F01;
 
-  /* Dark Theme */
-  --dark-primary: #1E90FF;
-  --dark-secondary: #00CED1;
-  --dark-accent: #7FFFD4;
-  --dark-background: #0A192F;
-  --dark-text: #F8F8FF;
-  --dark-surface: #172A45;
-  --dark-border: #2F4F4F;
+  /* Base Theme Variables */
+  --primary-color: var(--dark-green);     /* Previously #0B3D91 - Changed to dark green */
+  --secondary-color: var(--olive-green);  /* Previously #008080 - Changed to olive green */
+  --accent-color: var(--ochre-mustard);   /* Previously #00FFFF - Changed to ochre/mustard */
+  --background-color: #ffffff;
+  --text-color: #1e293b;
+  --surface-color: var(--tan-beige);      /* Previously #f8fafc - Changed to tan/beige */
+  --border-color: var(--teal-gray);       /* Previously #cbd5e1 - Changed to teal/gray */
+  
+  /* Semantic Colors - Adjusted for new palette */
+  --success-color: var(--olive-green);    /* Previously #22c55e */
+  --warning-color: var(--ochre-mustard);  /* Previously #eab308 */
+  --error-color: #ef4444;                 /* Keeping this red for error states */
+  --info-color: var(--teal-gray);         /* Previously #3b82f6 */
+  
+  /* Chart Colors */
+  --chart-primary: var(--dark-green);
+  --chart-secondary: var(--olive-green);
+  --chart-accent: var(--ochre-mustard);
+  --chart-neutral: var(--teal-gray);
 
-  /* Theme Variables */
-  --primary-color: var(--light-primary);
-  --secondary-color: var(--light-secondary);
-  --accent-color: var(--light-accent);
-  --background-color: var(--light-background);
-  --text-color: var(--light-text);
-  --surface-color: var(--light-surface);
-  --border-color: var(--light-border);
-  
-  /* Semantic Variables */
-  --success: #22c55e;
-  --warning: #eab308;
-  --error: #ef4444;
-  --info: #3b82f6;
-  
   /* RGB versions of colors for opacity support */
-  --primary-color-rgb: 11, 61, 145; /* RGB for #0B3D91 */
-  --secondary-color-rgb: 0, 128, 128; /* RGB for #008080 */
-  --accent-color-rgb: 0, 255, 255; /* RGB for #00FFFF */
-  --success-rgb: 34, 197, 94; /* RGB for #22c55e */
-  --warning-rgb: 234, 179, 8; /* RGB for #eab308 */
-  --error-rgb: 239, 68, 68; /* RGB for #ef4444 */
-  --info-rgb: 59, 130, 246; /* RGB for #3b82f6 */
-  --text-color-rgb: 30, 41, 59; /* RGB for #1e293b */
-  --background-color-rgb: 255, 255, 255; /* RGB for #ffffff */
-  --surface-color-rgb: 248, 250, 252; /* RGB for #f8fafc */
-  --border-color-rgb: 203, 213, 225; /* RGB for #cbd5e1 */
+  --primary-color-rgb: 63, 99, 88;       /* RGB for #3F6358 */
+  --secondary-color-rgb: 83, 111, 1;     /* RGB for #536F01 */
+  --accent-color-rgb: 232, 177, 0;       /* RGB for #E8B100 */
+  --success-rgb: 83, 111, 1;             /* RGB for #536F01 */
+  --warning-rgb: 232, 177, 0;            /* RGB for #E8B100 */
+  --error-rgb: 239, 68, 68;              /* RGB for #ef4444 */
+  --info-rgb: 138, 153, 148;             /* RGB for #8A9994 */
+  --surface-color-rgb: 252, 226, 173;    /* RGB for #FCE2AD */
+  --border-color-rgb: 138, 153, 148;     /* RGB for #8A9994 */
 }
 
+/* Dark Theme Adjustments */
 [data-theme="dark"] {
-  --primary-color: var(--dark-primary);
-  --secondary-color: var(--dark-secondary);
-  --accent-color: var(--dark-accent);
-  --background-color: var(--dark-background);
-  --text-color: var(--dark-text);
-  --surface-color: var(--dark-surface);
-  --border-color: var(--dark-border);
+  --primary-color: var(--dark-green);
+  --secondary-color: var(--olive-green);
+  --accent-color: var(--ochre-mustard);
+  --background-color: #1a2b22;            /* Dark version of our green */
+  --text-color: var(--tan-beige);         /* Light text on dark background */
+  --surface-color: #2a3c33;               /* Slightly lighter than background */
+  --border-color: var(--teal-gray);
 }
 
 /* Chart Colors */

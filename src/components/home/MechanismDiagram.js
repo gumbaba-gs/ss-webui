@@ -107,7 +107,6 @@ const MechanismDiagram = () => {
         'Slows metabolic processes without anaerobic conditions',
         'Extends shelf life by delaying ripening cascade'
       ],
-      ingredients: 'Sodium alginate, Calcium chloride'
     },
     {
       id: 'moisture',
@@ -122,7 +121,6 @@ const MechanismDiagram = () => {
         'Balances water activity to deter microbial growth',
         'Maintains cell turgor pressure for firmness'
       ],
-      ingredients: 'Glycerin, Pectin'
     },
     {
       id: 'microbial',
@@ -137,7 +135,6 @@ const MechanismDiagram = () => {
         'Prevents spoilage organism colonization',
         'Targets specific decay-causing pathogens'
       ],
-      ingredients: 'Citric acid, Lactic acid, Potassium sorbate'
     },
     {
       id: 'oxidation',
@@ -152,7 +149,6 @@ const MechanismDiagram = () => {
         'Preserves anthocyanins responsible for blue color',
         'Maintains nutritional value and antioxidant content'
       ],
-      ingredients: 'Ascorbic acid, Alpha-tocopherol, Rosemary extract'
     }
   ];
 
@@ -311,7 +307,7 @@ const MechanismDiagram = () => {
             </div>
             
             <div className="pt-3 border-t border-border">
-              <h4 className="font-semibold text-text mb-2">Key Ingredients:</h4>
+              
               <p className="text-text">{mechanisms.find(m => m.id === activeMechanism).ingredients}</p>
             </div>
           </div>

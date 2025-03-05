@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import './AboutSection.css';
-// Import placeholder image - replace with actual image when available
-// import labImage from '../../images/lab.jpg';
 
 const AboutSection = () => {
   const [activeTab, setActiveTab] = useState('overview');
@@ -15,7 +13,7 @@ const AboutSection = () => {
     }
   };
   
-  // Core offerings data
+  // Core offerings data remains the same as in the previous version
   const coreOfferings = [
     { 
       id: 'preservation', 
@@ -122,15 +120,7 @@ const AboutSection = () => {
               {activeTab === 'overview' && (
                 <div className="tab-content">
                   <div className="overview-content">
-                    <div className="overview-image">
-                      <img
-                        src="https://placehold.co/600x400/1a5e63/ffffff?text=Lab+Research"
-                        alt="Lab research"
-                        className="lab-image"
-                      />
-                    </div>
-                    
-                    <div className="overview-text">
+                    <div className="overview-text full-width">
                       <h3 className="overview-title">Our Scientific Approach</h3>
                       <p>
                         At Spanex Sciences, we combine cutting-edge research with practical applications to create solutions that address real-world challenges in food preservation and human health.
@@ -165,6 +155,7 @@ const AboutSection = () => {
                 </div>
               )}
               
+              {/* Offerings tab remains the same */}
               {activeTab === 'offerings' && (
                 <div className="tab-content">
                   <h3 className="offerings-title">Our Core Offerings</h3>

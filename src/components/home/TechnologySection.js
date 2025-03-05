@@ -4,32 +4,32 @@ import './TechnologySection.css';
 
 const TechnologySection = () => {
   // Mechanism data for the list below the diagram
-  const mechanisms = [
-    {
-      id: 'respiration',
-      title: 'Respiration Control',
-      icon: '🍃',
-      description: 'Regulates gas exchange and slows down ethylene-induced ripening, extending shelf life by delaying the natural aging process.'
-    },
-    {
-      id: 'moisture',
-      title: 'Moisture Optimization',
-      icon: '💧',
-      description: 'Creates optimal moisture equilibrium to prevent both dehydration and excess moisture that promotes mold growth.'
-    },
-    {
-      id: 'microbial',
-      title: 'Microbial Inhibition',
-      icon: '🦠',
-      description: 'Creates an inhospitable environment for bacteria and fungi, preventing spoilage without synthetic preservatives.'
-    },
-    {
-      id: 'oxidation',
-      title: 'Oxidation Prevention',
-      icon: '⚛️',
-      description: 'Prevents enzymatic browning and maintains color stability through powerful natural antioxidants.'
-    }
-  ];
+  // const mechanisms = [
+  //   {
+  //     id: 'respiration',
+  //     title: 'Respiration Control',
+  //     icon: '🍃',
+  //     description: 'Regulates gas exchange and slows down ethylene-induced ripening, extending shelf life by delaying the natural aging process.'
+  //   },
+  //   {
+  //     id: 'moisture',
+  //     title: 'Moisture Optimization',
+  //     icon: '💧',
+  //     description: 'Creates optimal moisture equilibrium to prevent both dehydration and excess moisture that promotes mold growth.'
+  //   },
+  //   {
+  //     id: 'microbial',
+  //     title: 'Microbial Inhibition',
+  //     icon: '🦠',
+  //     description: 'Creates an inhospitable environment for bacteria and fungi, preventing spoilage without synthetic preservatives.'
+  //   },
+  //   {
+  //     id: 'oxidation',
+  //     title: 'Oxidation Prevention',
+  //     icon: '⚛️',
+  //     description: 'Prevents enzymatic browning and maintains color stability through powerful natural antioxidants.'
+  //   }
+  // ];
 
   return (
     <section className="technology-section" id="technology">
@@ -50,7 +50,7 @@ const TechnologySection = () => {
         </div>
 
         {/* Mechanism cards */}
-        <div className="mechanism-cards">
+        {/* <div className="mechanism-cards">
           {mechanisms.map((mechanism) => (
             <div 
               key={mechanism.id} 
@@ -65,7 +65,7 @@ const TechnologySection = () => {
               </p>
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
     </section>
   );

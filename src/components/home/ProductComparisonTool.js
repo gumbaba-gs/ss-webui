@@ -427,7 +427,7 @@ const ProductComparisonTool = () => {
       </div>
       
       {/* Legend */}
-      <div className="comparison-legend">
+      {/* <div className="comparison-legend">
         <div className="legend-item">
           <span className="legend-color good"></span>
           <span className="legend-text">Best performance</span>
@@ -440,41 +440,8 @@ const ProductComparisonTool = () => {
           <span className="legend-color poor"></span>
           <span className="legend-text">Poor performance</span>
         </div>
-      </div>
+      </div> */}
       
-      {/* Radar chart */}
-      <div className="radar-chart-section">
-        <h3 className="chart-title">Performance Radar Chart</h3>
-        <div className="radar-chart">
-          <div className="radar-placeholder">
-            <p>Interactive radar chart visualization would appear here, showing the selected preservation methods across all metrics.</p>
-            <p>The chart would dynamically update as users select different products and metrics.</p>
-          </div>
-        </div>
-        
-        {/* Method legend for chart */}
-        <div className="chart-legend">
-          {methods.map(method => (
-            <div 
-              key={method.id}
-              className={`chart-legend-item ${highlightedMethod === method.id ? 'highlighted' : ''}`}
-              onMouseEnter={() => setHighlightedMethod(method.id)}
-              onMouseLeave={() => setHighlightedMethod(null)}
-            >
-              <span className={`legend-color ${method.color}`}></span>
-              <span className={`legend-text ${highlightedMethod === method.id ? method.textColor : ''}`}>
-                {method.name}
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
-      
-      {/* Footnote */}
-      <div className="comparison-footnote">
-        <p>*Data based on laboratory testing and field trials. Results may vary based on specific conditions.</p>
-        <p>**Hover over method names to highlight specific technologies in the comparison.</p>
-      </div>
     </div>
   );
 };

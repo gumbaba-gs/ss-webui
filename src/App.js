@@ -73,8 +73,8 @@ function App() {
         <Navbar />
         <main>
           <HeroSection />
-          <FoodWasteCounter />
           <AboutSection />
+          <FoodWasteCounter />
           <TechnologySection />
           <BeforeAfterComparison />
           <ComparisonSection />
