@@ -78,7 +78,7 @@ function App() {
           <TechnologySection />
           <BeforeAfterComparison />
           <ComparisonSection />
-          <SustainabilitySection />
+          {/* <SustainabilitySection /> */}
           <ProductsSection />
           <TeamSection />
           <ContactSection />

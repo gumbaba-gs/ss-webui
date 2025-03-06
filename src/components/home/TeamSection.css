@@ -148,7 +148,7 @@
   .member-name {
     font-size: var(--font-size-lg);
     font-weight: 600;
-    color: var(--text-color);
+    color: var(--primary-color);
     margin: 0 0 var(--space-2);
   }
   
@@ -161,7 +161,7 @@
   
   .member-bio {
     font-size: var(--font-size-base);
-    color: var(--text-color);
+    color: var(--surface);
     opacity: 0.85;
     margin: 0 0 var(--space-4);
     line-height: 1.5;

@@ -176,7 +176,7 @@
   .product-title {
     font-size: var(--font-size-lg);
     font-weight: 600;
-    color: var(--text-color);
+    color: var(--primary-color);
     margin: 0;
   }
   
@@ -222,7 +222,7 @@
   }
   
   .spec-label {
-    color: var(--text-color);
+    color: var(--primary-color);
     opacity: 0.7;
   }
   
