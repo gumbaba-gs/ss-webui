@@ -8,10 +8,11 @@
   
   /* Background with image */
   background: linear-gradient(
-      rgba(11, 61, 145, 0.9), 
-      rgba(0, 128, 128, 0.9)
-    ), url('./images/hero-bg6.jpg') center/cover no-repeat;
-    position: relative;
+    rgba(11, 61, 145, 0.9), 
+    rgba(0, 128, 128, 0.9)
+  ), url('./images/hero-bg6.jpg') center/cover no-repeat;
+  position: relative;
+  color: white;
 }
 
 /* Add overlay to ensure content is readable */
@@ -51,15 +52,16 @@
 }
 
 .section-title {
-  color: var(--text-color);
+  color: white !important;
   margin-bottom: var(--space-3);
   font-size: var(--font-size-2xl);
   font-weight: 700;
   line-height: 1.2;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .section-subtitle {
-  color: var(--text-color);
+  color: white !important;
   opacity: 0.8;
   max-width: 600px;
   margin: 0 auto;
@@ -83,9 +85,10 @@
   margin: 0 auto var(--space-8);
   padding: var(--space-6);
   border-radius: var(--space-3);
-  background: linear-gradient(45deg, rgba(11, 61, 145, 0.05), rgba(0, 255, 255, 0.1));
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(5px);
   box-shadow: 0 var(--space-1) var(--space-4) rgba(0, 0, 0, 0.1), 0 0 var(--space-4) rgba(0, 255, 255, 0.2);
-  border: 1px solid rgba(0, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 @media (min-width: 768px) {
@@ -96,36 +99,36 @@
 
 /* About text styling */
 .about-text {
-  color: var(--text-color);
+  color: white !important;
   font-size: var(--font-size-base);
   line-height: 1.6;
   margin-bottom: var(--space-4);
 }
 
 .highlight {
-  color: var(--primary-color);
+  color: #00FFFF !important;
   font-weight: 600;
 }
 
 .highlight-secondary {
-  color: var(--secondary-color);
+  color: #92F9F9 !important;
   font-weight: 600;
 }
 
 .highlight-accent {
-  color: var(--accent-color);
+  color: #00FFFF !important;
   font-weight: 600;
 }
 
 .highlight-success {
-  color: var(--success);
+  color: #4ADE80 !important;
   font-weight: 600;
 }
 
 /* Tab navigation */
 .about-tabs {
   display: flex;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   margin: var(--space-6) 0 var(--space-4);
   overflow-x: auto;
   scrollbar-width: none; /* Firefox */
@@ -142,7 +145,7 @@
   border: none;
   font-size: var(--font-size-base);
   font-weight: 500;
-  color: var(--text-color);
+  color: rgba(255, 255, 255, 0.8) !important;
   cursor: pointer;
   white-space: nowrap;
   position: relative;
@@ -156,16 +159,17 @@
   left: 0;
   width: 0;
   height: 2px;
-  background: var(--primary-color);
+  background: white;
   transition: width 0.3s;
 }
 
 .tab-button:hover {
-  color: var(--primary-color);
+  color: white !important;
 }
 
 .tab-button.active {
-  color: var(--primary-color);
+  color: white !important;
+  font-weight: 600;
 }
 
 .tab-button.active:after {
@@ -213,32 +217,19 @@
   overflow: hidden;
 }
 
-.lab-image {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: var(--space-2);
-  box-shadow: 0 var(--space-2) var(--space-4) rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s;
-}
-
-.overview-image:hover .lab-image {
-  transform: scale(1.02);
-}
-
 .overview-text {
   flex: 1;
 }
 
 .overview-title {
-  color: var(--primary-color);
+  color: white !important;
   font-size: var(--font-size-xl);
   font-weight: 600;
   margin-bottom: var(--space-3);
 }
 
 .overview-text p {
-  color: var(--text-color);
+  color: white !important;
   margin-bottom: var(--space-3);
   line-height: 1.6;
 }
@@ -252,7 +243,7 @@
 }
 
 .metric-card {
-  background-color: rgba(var(--primary-color-rgb), 0.1);
+  background-color: rgba(255, 255, 255, 0.9) !important;
   padding: var(--space-3);
   border-radius: var(--space-2);
   text-align: center;
@@ -267,12 +258,13 @@
 .metric-value {
   font-size: var(--font-size-xl);
   font-weight: 700;
-  color: var(--primary-color);
+  color: #0B3D91 !important;
+  margin-bottom: var(--space-1);
 }
 
 .metric-label {
   font-size: var(--font-size-sm);
-  color: var(--text-color);
+  color: #164471 !important;
   margin: 0;
 }
 
@@ -288,7 +280,7 @@
 
 /* Offerings tab content */
 .offerings-title {
-  color: var(--primary-color);
+  color: white !important;
   font-size: var(--font-size-xl);
   font-weight: 600;
   margin-bottom: var(--space-6);
@@ -301,12 +293,13 @@
 }
 
 .offering-item {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(5px);
   border-radius: var(--space-2);
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   transition: box-shadow 0.3s;
-  border: 1px solid var(--border-color);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .offering-item:hover {
@@ -326,7 +319,7 @@
 
 .offering-icon {
   font-size: 1.5rem;
-  background-color: rgba(var(--primary-color-rgb), 0.1);
+  background-color: rgba(11, 61, 145, 0.3);
   width: 44px;
   height: 44px;
   border-radius: 50%;
@@ -344,23 +337,24 @@
 .offering-title {
   font-size: var(--font-size-base);
   font-weight: 600;
-  color: var(--primary-color);
+  color: white !important;
   margin: 0 0 var(--space-1);
 }
 
 .offering-description {
   font-size: var(--font-size-sm);
-  color: var(--text-color);
+  color: rgba(255, 255, 255, 0.9) !important;
   margin: 0;
-  opacity: 0.8;
 }
 
 .offering-toggle {
   margin-left: var(--space-2);
+  color: white;
 }
 
 .toggle-icon {
   transition: transform 0.3s;
+  color: white;
 }
 
 .toggle-icon.expanded {
@@ -368,7 +362,7 @@
 }
 
 .offering-details {
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
   padding: 0 var(--space-3) var(--space-3) calc(44px + var(--space-6));
   animation: slideDown 0.3s ease-out;
 }
@@ -385,7 +379,7 @@
 
 .detail-item {
   margin-bottom: var(--space-2);
-  color: var(--text-color);
+  color: rgba(255, 255, 255, 0.9) !important;
   font-size: var(--font-size-sm);
   line-height: 1.5;
 }
@@ -429,7 +423,49 @@
 
 .counter-message {
   text-align: center;
-  color: var(--text-color);
+  color: white !important;
   font-size: var(--font-size-base);
   margin-bottom: 0;
+}
+
+/* Force text color overrides with high specificity */
+.about-section h1,
+.about-section h2,
+.about-section h3,
+.about-section h4,
+.about-section h5,
+.about-section h6,
+.about-section p,
+.about-section span,
+.about-section div,
+.about-section li {
+  color: white !important;
+}
+
+/* Additional specificity for specific elements that might be causing issues */
+.about-section .section-title,
+.about-section .section-subtitle,
+.about-section .about-text,
+.about-section .overview-title,
+.about-section .offerings-title,
+.about-section .offering-title {
+  color: white !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Override for metric cards which should have dark text */
+.about-section .metric-card .metric-value {
+  color: #0B3D91 !important;
+}
+
+.about-section .metric-card .metric-label {
+  color: #164471 !important;
+}
+
+/* Fallback for browsers that don't support backdrop-filter */
+@supports not (backdrop-filter: blur(5px)) {
+  .about-container,
+  .offering-item {
+    background-color: rgba(11, 61, 145, 0.8) !important;
+  }
 }

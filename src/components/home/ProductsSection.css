@@ -200,7 +200,7 @@
   
   .product-description {
     font-size: var(--font-size-base);
-    color: var(--text-color);
+    color: var(--primary-color);
     opacity: 0.85;
     margin-bottom: var(--space-4);
     line-height: 1.5;
@@ -228,7 +228,7 @@
   
   .spec-value {
     font-weight: 600;
-    color: var(--text-color);
+    color: var(--primary-color);
   }
   
   /* Product CTA */
@@ -301,6 +301,7 @@
     
     .product-title {
       font-size: var(--font-size-base);
+      color: var(--primary-color);
     }
     
     .product-description {

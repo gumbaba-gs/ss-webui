@@ -104,9 +104,9 @@
   .counter-value {
     font-size: 2.5rem;
     font-weight: 700;
-    color: var(--secondary-color);
+    color: var(--primary-color);
     margin-bottom: var(--space-2);
-    text-shadow: 0 0 10px rgba(0, 128, 128, 0.2);
+    text-shadow: 0 0 10px rgba(128, 30, 0, 0.2);
     display: flex;
     justify-content: center;
     align-items: center;

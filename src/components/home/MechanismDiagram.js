@@ -327,7 +327,8 @@ const MechanismDiagram = () => {
         ))}
       </div>
       
-      <div className="text-center text-xs sm:text-sm text-text mt-4">
+      <div className="text-center  text-color: white text-xs sm:text-sm text-text mt-4"
+      style={{ color: '#0B3D91' }}>
         Drag to rotate the diagram • Click on a mechanism for details
       </div>
     </div>
