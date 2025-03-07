@@ -1,21 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
+import './TeamSection.css';
 
 const TeamSection = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [activeTab, setActiveTab] = useState('all');
   const sectionRef = useRef(null);
-  
-  // Track window resize for responsiveness
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
   
   // Setup intersection observer to animate in when visible
   useEffect(() => {
@@ -48,6 +37,7 @@ const TeamSection = () => {
       image: 'https://placehold.co/400x400/1a5e63/ffffff?text=Dr.+Asmita',
       role: 'Chief Scientist & Founder',
       bio: 'Leading chemist with extensive experience in food preservation technology and multiple patents to her name.',
+      category: 'leadership',
       social: {
         linkedin: 'https://www.linkedin.com/in/asmita-prabhune-01580732/',
         email: '#contact'
@@ -59,6 +49,7 @@ const TeamSection = () => {
       image: 'https://placehold.co/400x400/1a5e63/ffffff?text=Gum+Shahid',
       role: 'CTO & Co-Founder',
       bio: 'IT expert with 20 years of experience in technology implementation and system design for scientific applications.',
+      category: 'leadership',
       social: {
         linkedin: 'https://www.linkedin.com/in/gumshahid/',
         email: '#contact'
@@ -70,6 +61,7 @@ const TeamSection = () => {
       image: 'https://placehold.co/400x400/1a5e63/ffffff?text=Khaja+Nayub',
       role: 'Business Development & Co-Founder',
       bio: 'Expert in international trade with 15+ years of experience in import/export operations and global market expansion.',
+      category: 'leadership',
       social: {
         linkedin: 'https://www.linkedin.com/in/khaja-nayub-rasul-sheik-20b6a6145/',
         email: '#contact'
@@ -81,6 +73,7 @@ const TeamSection = () => {
       image: 'https://placehold.co/400x400/1a5e63/ffffff?text=Khaderi+Sharief',
       role: 'COO, American Region',
       bio: 'Operations expert specializing in American markets with extensive experience in scaling science-based startups.',
+      category: 'operations',
       social: {
         linkedin: 'https://www.linkedin.com/in/khaderi-sharief-karimullasha-35110b19/',
         email: '#contact'
@@ -88,178 +81,72 @@ const TeamSection = () => {
     }
   ];
 
-  // Main container style
-  const outerContainerStyle = {
-    maxWidth: '1000px',
-    width: '100%',
-    margin: '0 auto',
-    padding: windowWidth < 768 ? '1rem' : '1.5rem',
-    animation: isVisible ? 'fadeIn 1s ease-out' : 'none',
-    opacity: isVisible ? 1 : 0,
-    transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
-    transition: 'opacity 0.6s ease, transform 0.6s ease'
-  };
+  // Filter team members based on active tab
+  const filteredMembers = activeTab === 'all' 
+    ? teamMembers 
+    : teamMembers.filter(member => member.category === activeTab);
 
-  // Card style
-  const cardStyle = {
-    background: 'linear-gradient(45deg, rgba(11, 61, 145, 0.8), rgba(0, 128, 128, 0.9))',
-    boxShadow: '0 4px 15px rgba(0, 0, 0, 0.2), 0 0 15px rgba(0, 255, 255, 0.3)',
-    border: '1px solid rgba(0, 255, 255, 0.2)',
-    borderRadius: '0.75rem',
-    padding: windowWidth < 768 ? '1rem' : '1.5rem',
-    marginBottom: windowWidth < 768 ? '1rem' : '1.5rem'
-  };
-
-  // Header style
-  const headerStyle = {
-    fontSize: windowWidth < 768 ? '1.25rem' : '1.5rem',
-    fontWeight: '600',
-    marginBottom: windowWidth < 768 ? '0.75rem' : '1rem',
-    color: 'white',
-    textShadow: '0 2px 4px rgba(0, 0, 0, 0.2)'
-  };
-
-  // Team member card style
-  const memberCardStyle = {
-    background: 'rgba(255, 255, 255, 0.1)',
-    borderRadius: '0.5rem',
-    overflow: 'hidden',
-    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-    transition: 'transform 0.3s, box-shadow 0.3s',
-    border: '1px solid rgba(0, 255, 255, 0.2)',
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column'
-  };
-
-  const teamGridStyle = {
-    display: 'grid',
-    gridTemplateColumns: windowWidth < 768 ? '1fr' : windowWidth < 1024 ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)',
-    gap: '1rem',
-    margin: '1rem 0'
-  };
+  // Tab options
+  const tabs = [
+    { id: 'all', label: 'All Team' },
+    { id: 'leadership', label: 'Leadership' },
+    { id: 'operations', label: 'Operations' }
+  ];
 
   return (
-    <section className="team-section" id="team">
-      <div ref={sectionRef} style={outerContainerStyle}>
-        <div style={cardStyle}>
-          <h2 style={headerStyle}>Our Expert Team</h2>
-          <p style={{
-            color: 'white',
-            marginBottom: '1rem',
-            textAlign: 'center',
-            opacity: 0.9
-          }}>
-            Meet the visionaries and experts behind Spanex Sciences' groundbreaking formulations.
-          </p>
+    <section className="team-section" id="team" ref={sectionRef}>
+      <div className="team-section-header">
+        <h2 className="team-section-title">Our Expert Team</h2>
+        <p className="team-section-subtitle">
+          Meet the visionaries and experts behind Spanex Sciences' groundbreaking formulations.
+        </p>
+      </div>
 
-          <div style={teamGridStyle}>
-            {teamMembers.map((member, index) => (
+      <div className={`team-container ${isVisible ? 'fade-in' : ''}`}>
+        <div className="team-card-container">
+          {/* Tab Buttons */}
+          <div className="team-tab-container">
+            {tabs.map(tab => (
+              <button
+                key={tab.id}
+                className={`team-tab-button ${activeTab === tab.id ? 'active' : ''}`}
+                onClick={() => setActiveTab(tab.id)}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Team Members Grid */}
+          <div className="team-grid">
+            {filteredMembers.map((member, index) => (
               <div 
                 key={member.id} 
-                style={{
-                  ...memberCardStyle,
-                  transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-                  transition: `transform 0.5s ease ${index * 0.1}s, opacity 0.5s ease ${index * 0.1}s, box-shadow 0.3s ease`
-                }}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-5px)';
-                  e.currentTarget.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.1), 0 0 15px rgba(0, 255, 255, 0.2)';
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
-                }}
+                className={`team-card ${isVisible ? 'visible' : ''}`}
+                style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div style={{
-                  aspectRatio: '1',
-                  overflow: 'hidden',
-                  position: 'relative'
-                }}>
+                <div className="member-image-container">
                   <img 
                     src={member.image} 
                     alt={member.name} 
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover',
-                      transition: 'transform 0.5s'
-                    }}
-                    onMouseOver={(e) => {
-                      e.currentTarget.style.transform = 'scale(1.05)';
-                    }}
-                    onMouseOut={(e) => {
-                      e.currentTarget.style.transform = 'scale(1)';
-                    }}
+                    className="member-image"
                     loading="lazy" 
                   />
                 </div>
                 
-                <div style={{
-                  padding: '1rem',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  flexGrow: 1
-                }}>
-                  <h3 style={{
-                    fontSize: '1.125rem',
-                    fontWeight: '600',
-                    color: 'white',
-                    margin: '0 0 0.25rem 0'
-                  }}>
-                    {member.name}
-                  </h3>
+                <div className="member-content">
+                  <h3 className="member-name">{member.name}</h3>
+                  <p className="member-role">{member.role}</p>
+                  <p className="member-bio">{member.bio}</p>
                   
-                  <p style={{
-                    fontSize: '0.875rem',
-                    color: 'rgb(152, 245, 255)',
-                    fontWeight: '500',
-                    marginBottom: '0.75rem'
-                  }}>
-                    {member.role}
-                  </p>
-                  
-                  <p style={{
-                    fontSize: '0.875rem',
-                    color: 'white',
-                    opacity: 0.9,
-                    marginBottom: '1rem',
-                    lineHeight: 1.5,
-                    flexGrow: 1
-                  }}>
-                    {member.bio}
-                  </p>
-                  
-                  <div style={{
-                    display: 'flex',
-                    gap: '0.5rem',
-                    marginTop: 'auto'
-                  }}>
+                  <div className="member-social">
                     {member.social.linkedin && (
                       <a 
                         href={member.social.linkedin} 
                         target="_blank" 
                         rel="noopener noreferrer"
                         aria-label={`${member.name}'s LinkedIn profile`}
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          width: '35px',
-                          height: '35px',
-                          borderRadius: '50%',
-                          backgroundColor: 'rgba(11, 61, 145, 0.8)',
-                          color: 'white',
-                          transition: 'background-color 0.3s, transform 0.3s'
-                        }}
-                        onMouseOver={(e) => {
-                          e.currentTarget.style.backgroundColor = 'rgba(11, 61, 145, 0.9)';
-                          e.currentTarget.style.transform = 'translateY(-3px)';
-                        }}
-                        onMouseOut={(e) => {
-                          e.currentTarget.style.backgroundColor = 'rgba(11, 61, 145, 0.8)';
-                          e.currentTarget.style.transform = 'translateY(0)';
-                        }}
+                        className="social-link linkedin"
                       >
                         <i className="fab fa-linkedin-in"></i>
                       </a>
@@ -269,25 +156,7 @@ const TeamSection = () => {
                       <a 
                         href={member.social.email} 
                         aria-label={`Email ${member.name}`}
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          width: '35px',
-                          height: '35px',
-                          borderRadius: '50%',
-                          backgroundColor: 'rgba(0, 128, 128, 0.8)',
-                          color: 'white',
-                          transition: 'background-color 0.3s, transform 0.3s'
-                        }}
-                        onMouseOver={(e) => {
-                          e.currentTarget.style.backgroundColor = 'rgba(0, 128, 128, 0.9)';
-                          e.currentTarget.style.transform = 'translateY(-3px)';
-                        }}
-                        onMouseOut={(e) => {
-                          e.currentTarget.style.backgroundColor = 'rgba(0, 128, 128, 0.8)';
-                          e.currentTarget.style.transform = 'translateY(0)';
-                        }}
+                        className="social-link email"
                       >
                         <i className="fas fa-envelope"></i>
                       </a>
@@ -300,70 +169,20 @@ const TeamSection = () => {
         </div>
 
         {/* CTA Section */}
-        <div style={{
-          ...cardStyle, 
-          textAlign: 'center',
-          padding: '1.5rem'
-        }}>
-          <p style={{
-            color: 'white',
-            marginBottom: '1.5rem',
-            textAlign: 'center',
-            opacity: 0.9,
-            fontSize: '1.125rem'
-          }}>
+        <div className="team-cta-card">
+          <p className="team-cta-text">
             Interested in joining our team or learning more about our work?
           </p>
           
-          <a 
-            href="#contact" 
-            style={{
-              display: 'inline-block',
-              backgroundColor: 'rgba(11, 61, 145, 0.8)',
-              color: 'white',
-              fontWeight: '600',
-              padding: '0.875rem 1.5rem',
-              borderRadius: '9999px',
-              textDecoration: 'none',
-              transition: 'background-color 0.3s, transform 0.3s, box-shadow 0.3s'
-            }}
-            onMouseOver={(e) => {
-              e.currentTarget.style.backgroundColor = 'rgba(11, 61, 145, 0.9)';
-              e.currentTarget.style.transform = 'translateY(-2px)';
-              e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.backgroundColor = 'rgba(11, 61, 145, 0.8)';
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = 'none';
-            }}
-          >
+          <a href="#contact" className="team-cta-button">
             Contact Our Team
           </a>
           
-          <div style={{
-            display: 'flex',
-            justifyContent: 'center',
-            gap: '0.25rem',
-            marginTop: '1.5rem'
-          }}>
+          <div className="team-indicator-bars">
             {[...Array(8)].map((_, index) => (
               <div
                 key={index}
-                style={{
-                  height: windowWidth < 768 ? '6px' : '8px',
-                  width: windowWidth < 768 ? '24px' : '30px',
-                  background: index < 5 ? 
-                    'linear-gradient(to right, var(--secondary-color), var(--accent-color))' : 
-                    'rgba(0, 255, 255, 0.1)',
-                  borderRadius: '4px',
-                  border: index < 5 ? 
-                    '1px solid rgba(0, 255, 255, 0.5)' : 
-                    '1px solid rgba(0, 255, 255, 0.2)',
-                  boxShadow: index < 5 ? 
-                    '0 0 10px rgba(0, 255, 255, 0.4)' : 
-                    '0 0 5px rgba(0, 255, 255, 0.1)'
-                }}
+                className={`team-indicator-bar ${index < 5 ? 'active' : ''}`}
               ></div>
             ))}
           </div>
