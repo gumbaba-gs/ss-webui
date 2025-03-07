@@ -12,7 +12,7 @@ import BeforeAfterComparison from './components/home/BeforeAfterComparison';
 import ComparisonSection from './components/home/ComparisonSection';
 import SustainabilitySection from './components/home/SustainabilitySection';
 import TeamSection from './components/home/TeamSection';
-import ProductsSection from './components/home/ProductsSection';
+import ProductSection from './components/home/ProductSection';
 import ContactSection from './components/home/ContactSection';
 import Footer from './components/layout/Footer';
 
@@ -79,7 +79,7 @@ function App() {
           <BeforeAfterComparison />
           <ComparisonSection />
           {/* <SustainabilitySection /> */}
-          <ProductsSection />
+          <ProductSection />
           <TeamSection />
           <ContactSection />
         </main>

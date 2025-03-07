@@ -92,7 +92,7 @@ const ComparisonSection = () => {
       name: 'Taste Impact', 
       icon: '👅',
       description: 'Effect on the natural taste and texture of the produce',
-      higherIsBetter: true,
+      higherIsBetter: false,
       valueType: 'rating',
     },
     { 
@@ -120,7 +120,6 @@ const ComparisonSection = () => {
       valueType: 'boolean',
     },
   ];
-  
   // Comparison data for each product and preservation method
   const comparisonData = {
     berries: {
@@ -261,9 +260,17 @@ const ComparisonSection = () => {
     },
   };
   
-  // Helper function to evaluate ratings
+  // Helper function to evaluate ratings for standard metrics
+  // For taste impact, NONE or MINIMAL is good (less impact is better)
   const getRatingValue = (rating) => {
     const ratings = { 'NONE': 5, 'MINIMAL': 4, 'MODERATE': 3, 'SIGNIFICANT': 2, 'SEVERE': 1 };
+    return ratings[rating] || 0;
+  };
+  
+  // Helper function for cost ratings - reversed scale for cost
+  // For cost, LOW is good, HIGH is bad
+  const getCostValue = (rating) => {
+    const ratings = { 'LOW': 5, 'MODERATE': 3, 'HIGH': 1 };
     return ratings[rating] || 0;
   };
   
@@ -282,6 +289,39 @@ const ComparisonSection = () => {
   
   // Helper function to get color class based on value comparison
   const getComparisonClass = (value, otherValues, metric) => {
+    // Handle specific metrics by ID
+    if (metric.id === 'application') {
+      // For application ease, HIGH is good
+      // Direct mapping for application values
+      if (value === 'HIGH') {
+        return 'comparison-good';
+      } else if (value === 'MODERATE') {
+        return 'comparison-medium';
+      } else {
+        return 'comparison-poor';
+      }
+    }
+    
+    if (metric.id === 'cost') {
+      // For cost, LOW is good
+      // Direct mapping for cost values
+      if (value === 'LOW') {
+        return 'comparison-good';
+      } else if (value === 'MODERATE') {
+        return 'comparison-medium';
+      } else {
+        return 'comparison-poor';
+      }
+    }
+    
+    if (metric.id === 'taste') {
+      // For taste, NONE/MINIMAL is good (less impact is better)
+      const ratingValue = getRatingValue(value);
+      const isHighest = !otherValues.some(v => getRatingValue(v) > ratingValue);
+      return isHighest ? 'comparison-good' : (ratingValue >= 3 ? 'comparison-medium' : 'comparison-poor');
+    }
+    
+    // Handle standard metric types
     if (metric.valueType === 'boolean') {
       return value ? 'comparison-good' : 'comparison-poor';
     } else if (metric.valueType === 'rating') {
@@ -303,7 +343,7 @@ const ComparisonSection = () => {
     
     return '';
   };
-  
+
   // Intersection observer for animation
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -328,7 +368,6 @@ const ComparisonSection = () => {
       }
     };
   }, []);
-
   // Styles for comparison container and its content
   const styles = {
     methodComparisonGrid: {
@@ -618,6 +657,7 @@ const ComparisonSection = () => {
                   style={styles.methodCard(method, highlightedMethod === method.id)}
                   onClick={() => setHighlightedMethod(method.id)}
                   onMouseEnter={() => setHighlightedMethod(method.id)}
+                  onMouseLeave={() => setHighlightedMethod(null)}
                   title={method.name}
                 >
                   <div style={styles.methodName}>{method.name}</div>
