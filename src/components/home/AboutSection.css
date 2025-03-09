@@ -501,17 +501,7 @@
   }
 }
 
-/* Fallback for browsers that don't support backdrop-filter */
-@supports not (backdrop-filter: blur(5px)) {
-  .about-section__content-card,
-  .about-section__offering {
-    background-color: rgba(11, 61, 145, 0.8);
-  }
-}
-
-/* Add this to your AboutSection.css file */
-
-/* Fix for mobile background inconsistency in offerings */
+/* Fix for background inconsistency in offerings */
 .about-section__offering {
   background-color: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(5px);
@@ -523,10 +513,10 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* Mobile-specific adjustments */
-@media (max-width: 767px) {
+/* Mobile-specific and landscape orientation adjustments */
+@media (max-width: 767px), (orientation: landscape) and (max-height: 500px) {
   .about-section__offering {
-    /* Explicitly set background for mobile devices */
+    /* Explicitly set background for mobile devices regardless of orientation */
     background-color: rgba(11, 61, 145, 0.6);
     /* Fallback for devices that don't support backdrop-filter */
     backdrop-filter: none;

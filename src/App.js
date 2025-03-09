@@ -29,8 +29,11 @@ function App() {
     // Add viewport meta tag to ensure proper scaling on mobile devices
     const metaViewport = document.createElement('meta');
     metaViewport.name = 'viewport';
-    metaViewport.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover';
+    metaViewport.content = 'width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover';
+    // metaViewport.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover';
     document.head.appendChild(metaViewport);
+    
+
 
     // Smooth scrolling for anchor links
     const handleAnchorClick = (e) => {

@@ -467,3 +467,41 @@
   box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
   border: 1px solid rgba(0, 255, 255, 0.5);
 }
+
+/* Fix for header alignment in landscape mode */
+@media (orientation: landscape) {
+  /* Target the header container */
+  .image-comparison-container > div:first-child {
+    height: auto;
+    min-height: 36px;
+  }
+  
+  /* Ensure headers are properly vertically centered */
+  .image-comparison-container > div:first-child > div {
+    padding-top: 0;
+    padding-bottom: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Remove extra spacing in the text itself */
+  .image-comparison-container > div:first-child > div span,
+  .image-comparison-container > div:first-child > div div {
+    line-height: normal;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+/* Additional fix for very short landscape heights */
+@media (orientation: landscape) and (max-height: 450px) {
+  .image-comparison-container > div:first-child {
+    min-height: 30px;
+  }
+  
+  .image-comparison-container > div:first-child > div {
+    font-size: 0.9rem;
+  }
+}

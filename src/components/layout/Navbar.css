@@ -372,3 +372,17 @@ body.menu-open {
     background: CanvasText;
   }
 }
+
+.navbar__logo-text {
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* Adjust logo size on smaller screens */
+@media (max-width: 350px) {
+  .navbar__logo-text {
+    font-size: 1.25rem;
+  }
+}
