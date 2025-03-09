@@ -7,23 +7,71 @@ const Footer = () => {
   // Footer links grouped by category
   const footerLinks = {
     products: [
-      { name: 'Berry Fresh', url: '#' },
-      { name: 'Apple Shield', url: '#' },
-      { name: 'Coming Soon', url: '#' },
-      { name: 'Custom Solutions', url: '#' }
+      { name: 'Berry Fresh', url: '#products' },
+      { name: 'Apple Shield', url: '#products' },
+      { name: 'Coming Soon', url: '#products' },
+      { name: 'Custom Solutions', url: '#contact' }
     ],
     company: [
       { name: 'About Us', url: '#about' },
       { name: 'Our Team', url: '#team' },
-      { name: 'Careers', url: '#' },
+      { name: 'Careers', url: '#contact' },
       { name: 'Contact', url: '#contact' }
     ],
     resources: [
-      { name: 'Documentation', url: '#' },
-      { name: 'FDA Compliance', url: '#' },
-      { name: 'Application Guidelines', url: '#' },
-      { name: 'Research', url: '#' }
+      { 
+        name: 'Documentation', 
+        url: '#documentation',
+        sublinks: [
+          { name: 'Product Data Sheets', url: '#data-sheets' },
+          { name: 'Safety Information', url: '#safety' },
+          { name: 'Technical Guides', url: '#guides' },
+          { name: 'Implementation Manuals', url: '#manuals' }
+        ]
+      },
+      { 
+        name: 'FDA Compliance', 
+        url: '#fda-compliance',
+        sublinks: [
+          { name: 'GRAS Status Documents', url: '#gras-status' },
+          { name: 'Regulatory Information', url: '#regulatory' },
+          { name: 'Food Safety Certifications', url: '#certifications' },
+          { name: 'Compliance Statements', url: '#compliance' }
+        ]
+      },
+      { 
+        name: 'Application Guidelines', 
+        url: '#application-guidelines',
+        sublinks: [
+          { name: 'Spray Application Guide', url: '#spray-guide' },
+          { name: 'Dipping Procedures', url: '#dipping' },
+          { name: 'Dosage Calculator', url: '#calculator' },
+          { name: 'Storage Requirements', url: '#storage' }
+        ]
+      },
+      { 
+        name: 'Research', 
+        url: '#research',
+        sublinks: [
+          { name: 'Efficacy Studies', url: '#efficacy' },
+          { name: 'White Papers', url: '#white-papers' },
+          { name: 'Case Studies', url: '#case-studies' },
+          { name: 'Academic Collaborations', url: '#academic' }
+        ]
+      }
     ]
+  };
+
+  // This function generates a dropdown menu of sublinks when a resource link is clicked
+  const handleResourceClick = (e, link) => {
+    if (link.sublinks) {
+      e.preventDefault();
+      // Toggle visibility of dropdown
+      const dropdown = e.currentTarget.nextElementSibling;
+      if (dropdown) {
+        dropdown.classList.toggle('active');
+      }
+    }
   };
 
   return (
@@ -81,14 +129,31 @@ const Footer = () => {
               </ul>
             </div>
 
-            <div className="footer-links-column">
+            <div className="footer-links-column resources-column">
               <h4 className="footer-links-title">Resources</h4>
               <ul className="footer-links">
                 {footerLinks.resources.map((link, index) => (
-                  <li key={index} className="footer-link-item">
-                    <a href={link.url} className="footer-link">
+                  <li key={index} className="footer-link-item resource-link-item">
+                    <a 
+                      href={link.url} 
+                      className="footer-link resource-link"
+                      onClick={(e) => handleResourceClick(e, link)}
+                    >
                       {link.name}
+                      {link.sublinks && <i className="fas fa-chevron-down footer-dropdown-icon"></i>}
                     </a>
+                    
+                    {link.sublinks && (
+                      <ul className="footer-sublinks">
+                        {link.sublinks.map((sublink, subIndex) => (
+                          <li key={subIndex} className="footer-sublink-item">
+                            <a href={sublink.url} className="footer-sublink">
+                              {sublink.name}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </li>
                 ))}
               </ul>

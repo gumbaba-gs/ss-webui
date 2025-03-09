@@ -1,5 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './TeamSection.css';
+import asmitaImage from './images/ASmita.png'
+import rasulImage from './images/rasul.png'
+import gbImage from './images/GB.png'
+import bbImage from './images/bb.png'
 
 const TeamSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -34,7 +38,7 @@ const TeamSection = () => {
     {
       id: 'asmita',
       name: 'Dr. Asmita Prabhune',
-      image: 'https://placehold.co/400x400/1a5e63/ffffff?text=Dr.+Asmita',
+      image: asmitaImage,
       role: 'Chief Scientist & Founder',
       bio: 'Leading chemist with extensive experience in food preservation technology and multiple patents to her name.',
       category: 'leadership',
@@ -46,7 +50,7 @@ const TeamSection = () => {
     {
       id: 'gum',
       name: 'Gum Shahid',
-      image: 'https://placehold.co/400x400/1a5e63/ffffff?text=Gum+Shahid',
+      image: gbImage,
       role: 'CTO & Co-Founder',
       bio: 'IT expert with 20 years of experience in technology implementation and system design for scientific applications.',
       category: 'leadership',
@@ -58,7 +62,7 @@ const TeamSection = () => {
     {
       id: 'khaja',
       name: 'Khaja Nayub Rasul Sheik',
-      image: 'https://placehold.co/400x400/1a5e63/ffffff?text=Khaja+Nayub',
+      image: rasulImage,
       role: 'Business Development & Co-Founder',
       bio: 'Expert in international trade with 15+ years of experience in import/export operations and global market expansion.',
       category: 'leadership',
@@ -70,7 +74,7 @@ const TeamSection = () => {
     {
       id: 'khaderi',
       name: 'Khaderi Sharief Karimullasha',
-      image: 'https://placehold.co/400x400/1a5e63/ffffff?text=Khaderi+Sharief',
+      image: bbImage,
       role: 'COO, American Region',
       bio: 'Operations expert specializing in American markets with extensive experience in scaling science-based startups.',
       category: 'operations',

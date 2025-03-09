@@ -739,7 +739,7 @@ const ComparisonSection = () => {
         </div>
         <div className="comparison-section__footnote">
           <p className="comparison-section__footnote-text">
-          * Comparison data based on laboratory testing and industry standards. Actual results may vary depending on specific conditions.
+            * Comparison data based on laboratory testing and industry standards. Actual results may vary depending on specific conditions.
           </p>
           <div className="comparison-section__indicator-bars">
             {[...Array(8)].map((_, index) => (

@@ -205,3 +205,101 @@
       padding-bottom: max(var(--space-6), env(safe-area-inset-bottom));
     }
   }
+
+  /* Add these styles to your Footer.css file */
+
+/* Resource dropdown styling */
+.resources-column {
+  position: relative;
+}
+
+.resource-link-item {
+  position: relative;
+}
+
+.resource-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-dropdown-icon {
+  font-size: 0.75rem;
+  margin-left: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+.resource-link-item:hover .footer-dropdown-icon {
+  transform: rotate(-180deg);
+}
+
+.footer-sublinks {
+  max-height: 0;
+  overflow: hidden;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+  padding-left: 1rem;
+}
+
+.footer-sublinks.active,
+.resource-link-item:hover .footer-sublinks {
+  max-height: 200px;
+  padding-top: 0.5rem;
+  padding-bottom: 0.25rem;
+}
+
+.footer-sublink-item {
+  margin-bottom: 0.25rem;
+}
+
+.footer-sublink {
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+  display: block;
+  padding: 0.25rem 0;
+}
+
+.footer-sublink:hover {
+  color: white;
+  transform: translateX(3px);
+}
+
+/* Mobile responsiveness for sublinks */
+@media (max-width: 768px) {
+  .footer-links-column {
+    width: 100%;
+  }
+  
+  .footer-sublinks.active {
+    padding-left: 1.5rem;
+  }
+  
+  .footer-sublink {
+    padding: 0.5rem 0;
+    font-size: 0.9rem;
+  }
+}
+
+/* Add visual indicator for expandable items */
+.resource-link {
+  position: relative;
+}
+
+.resource-link::before {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  transition: background 0.3s ease;
+}
+
+.resource-link:hover::before {
+  background: rgba(0, 255, 255, 0.3);
+}
