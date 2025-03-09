@@ -7,39 +7,7 @@ const AboutSection = () => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
   
-  // Toggle feature expansion
-  const toggleFeature = (id) => {
-    if (expandedFeature === id) {
-      setExpandedFeature(null);
-    } else {
-      setExpandedFeature(id);
-    }
-  };
-  
-  // Set up intersection observer for animation on scroll
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const [entry] = entries;
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-    
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-    
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
-  }, []);
-  
-  // Core offerings data
+  // Core offerings data - moved outside the component for better performance
   const coreOfferings = [
     { 
       id: 'preservation', 
@@ -103,9 +71,44 @@ const AboutSection = () => {
     }
   ];
 
+  // Company metrics for the overview tab
+  const companyMetrics = [
+    { value: '100+', label: 'Formulations' },
+    { value: '3-5×', label: 'Shelf Life Extension' },
+    { value: '75%', label: 'Waste Reduction' },
+    { value: '20+', label: 'Countries Served' }
+  ];
+
+  // Toggle feature expansion with improved handling
+  const toggleFeature = (id) => {
+    setExpandedFeature(prevId => prevId === id ? null : id);
+  };
+  
+  // Set up intersection observer for animation on scroll
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+    
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+    
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
   return (
     <section className="about-section" id="about">
-      {/* Section header outside the main container */}
+      {/* Section header */}
       <div className="about-section__header">
         <h2 className="about-section__title">About Spanex Sciences</h2>
         <p className="about-section__subtitle">
@@ -113,42 +116,52 @@ const AboutSection = () => {
         </p>
       </div>
       
+      {/* Main content container */}
       <div 
         ref={sectionRef}
         className={`about-section__container ${isVisible ? 'visible' : ''}`}
       >
         <div className="about-section__content-card">
+          {/* Company description */}
           <div className="about-section__content">
-            <p className="about-section__text">
-              Spanex Sciences is a <span className="about-section__highlight">pioneering scientific company</span> with over <span className="about-section__highlight">100 innovative formulations</span>, spanning both <span className="about-section__highlight--secondary">organic and non-organic solutions</span>. Our <span className="about-section__highlight--accent">proprietary technologies</span> are transforming multiple industries by enhancing <span className="about-section__highlight">preservation, sustainability, and human health</span>.
-            </p>
+            <div className="about-section__text-container">
+              <p className="about-section__text">
+                Spanex Sciences is a <span className="about-section__highlight">pioneering scientific company</span> with over <span className="about-section__highlight">100 innovative formulations</span>, spanning both <span className="about-section__highlight--secondary">organic and non-organic solutions</span>. Our <span className="about-section__highlight--accent">proprietary technologies</span> are transforming multiple industries by enhancing <span className="about-section__highlight">preservation, sustainability, and human health</span>.
+              </p>
+              
+              <p className="about-section__text">
+                Our <span className="about-section__highlight">breakthrough preservation methods</span> extend the <span className="about-section__highlight">shelf life</span> of fruits, vegetables, and flowers—while maintaining their <span className="about-section__highlight--secondary">natural taste, appearance, and nutritional value</span>.
+              </p>
+              
+              <p className="about-section__text">
+                Beyond food preservation, we are at the forefront of <span className="about-section__highlight">human and animal health innovations</span>, including <span className="about-section__highlight--secondary">lifespan-enhancing superfoods</span>, <span className="about-section__highlight--success">eco-friendly waterless hygiene products</span>, and <span className="about-section__highlight--accent">advanced produce and meat wash solutions</span> that ensure <span className="about-section__highlight">safety, freshness, and compliance with global food safety standards</span>.
+              </p>
+            </div>
             
-            <p className="about-section__text">
-              Our <span className="about-section__highlight">breakthrough preservation methods</span> extend the <span className="about-section__highlight">shelf life</span> of fruits, vegetables, and flowers—while maintaining their <span className="about-section__highlight--secondary">natural taste, appearance, and nutritional value</span>.
-            </p>
-            
-            <p className="about-section__text">
-              Beyond food preservation, we are at the forefront of <span className="about-section__highlight">human and animal health innovations</span>, including <span className="about-section__highlight--secondary">lifespan-enhancing superfoods</span>, <span className="about-section__highlight--success">eco-friendly waterless hygiene products</span>, and <span className="about-section__highlight--accent">advanced produce and meat wash solutions</span> that ensure <span className="about-section__highlight">safety, freshness, and compliance with global food safety standards</span>.
-            </p>
-            
-            {/* Tabs navigation */}
+            {/* Tab navigation */}
             <div className="about-section__tabs">
               <button
+                type="button"
                 onClick={() => setActiveTab('overview')}
                 className={`about-section__tab-button ${activeTab === 'overview' ? 'active' : ''}`}
+                aria-selected={activeTab === 'overview'}
+                role="tab"
               >
                 Company Overview
               </button>
               <button
+                type="button"
                 onClick={() => setActiveTab('offerings')}
                 className={`about-section__tab-button ${activeTab === 'offerings' ? 'active' : ''}`}
+                aria-selected={activeTab === 'offerings'}
+                role="tab"
               >
                 Core Offerings
               </button>
             </div>
             
             {/* Tab content container */}
-            <div className="about-section__tab-content">
+            <div className="about-section__tab-content" role="tabpanel">
               {activeTab === 'overview' && (
                 <div className="about-section__overview">
                   <div className="about-section__overview-content">
@@ -160,26 +173,14 @@ const AboutSection = () => {
                       Our team of scientists and food technology experts work together to develop formulations that are not only effective but also safe, sustainable, and compliant with global regulations.
                     </p>
                     
+                    {/* Metrics grid with improved structure */}
                     <div className="about-section__metrics-grid">
-                      <div className="about-section__metric-card">
-                        <div className="about-section__metric-value">100+</div>
-                        <p className="about-section__metric-label">Formulations</p>
-                      </div>
-                      
-                      <div className="about-section__metric-card">
-                        <div className="about-section__metric-value">3-5×</div>
-                        <p className="about-section__metric-label">Shelf Life Extension</p>
-                      </div>
-                      
-                      <div className="about-section__metric-card">
-                        <div className="about-section__metric-value">75%</div>
-                        <p className="about-section__metric-label">Waste Reduction</p>
-                      </div>
-                      
-                      <div className="about-section__metric-card">
-                        <div className="about-section__metric-value">20+</div>
-                        <p className="about-section__metric-label">Countries Served</p>
-                      </div>
+                      {companyMetrics.map((metric, index) => (
+                        <div className="about-section__metric-card" key={index}>
+                          <div className="about-section__metric-value">{metric.value}</div>
+                          <p className="about-section__metric-label">{metric.label}</p>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -189,6 +190,7 @@ const AboutSection = () => {
                 <div className="about-section__offerings">
                   <h3 className="about-section__offerings-title">Our Core Offerings</h3>
                   
+                  {/* Offerings list with accessibility improvements */}
                   <div className="about-section__offerings-list">
                     {coreOfferings.map(offering => (
                       <div 
@@ -197,12 +199,14 @@ const AboutSection = () => {
                           expandedFeature === offering.id ? 'about-section__offering--expanded' : ''
                         }`}
                       >
-                        <div 
+                        <button 
                           className="about-section__offering-header"
                           onClick={() => toggleFeature(offering.id)}
+                          aria-expanded={expandedFeature === offering.id}
+                          aria-controls={`offering-details-${offering.id}`}
                         >
                           <div className="about-section__offering-icon">
-                            {offering.icon}
+                            <span aria-hidden="true">{offering.icon}</span>
                           </div>
                           <div className="about-section__offering-info">
                             <h4 className="about-section__offering-title">{offering.title}</h4>
@@ -215,6 +219,7 @@ const AboutSection = () => {
                               }`} 
                               width="20" height="20" 
                               viewBox="0 0 24 24"
+                              aria-hidden="true"
                             >
                               <path 
                                 fill="currentColor" 
@@ -222,10 +227,14 @@ const AboutSection = () => {
                               />
                             </svg>
                           </div>
-                        </div>
+                        </button>
                         
+                        {/* Conditionally rendered details section */}
                         {expandedFeature === offering.id && (
-                          <div className="about-section__offering-details">
+                          <div 
+                            className="about-section__offering-details"
+                            id={`offering-details-${offering.id}`}
+                          >
                             <ul className="about-section__details-list">
                               {offering.details.map((detail, index) => (
                                 <li key={index} className="about-section__details-item">{detail}</li>
@@ -242,39 +251,24 @@ const AboutSection = () => {
           </div>
         </div>
         
-        {/* Indicator bars */}
-        {/* <div className="about-section__indicator-bars">
-          {[...Array(8)].map((_, index) => (
-            <div
-              key={index}
-              className={`about-section__indicator-bar ${index < 5 ? 'about-section__indicator-bar--active' : ''}`}
-            ></div>
-          ))}
-        </div> */}
-        
         {/* CTA/Footnote section */}
         <div className="about-section__footnote">
           <p className="about-section__footnote-text">
-          With Spanex technology, we can reduce food waste by up to 75%.
+            With Spanex technology, we can reduce food waste by up to 75%.
           </p>
-{/*           
-          <a href="#contact" className="about-section__cta">
-            Contact Our Team
-          </a>
-           */}
-          {/* Secondary indicator bars */}
+          
+          {/* Visual indicator bars */}
           <div className="about-section__indicator-bars">
             {[...Array(8)].map((_, index) => (
               <div
                 key={index}
-                className={`about-section__indicator-bar ${index < 5 ? 'about-section__indicator-bar--active' : ''}`}
+                className={`about-section__indicator-bar ${
+                  index < 5 ? 'about-section__indicator-bar--active' : ''
+                }`}
+                aria-hidden="true"
               ></div>
             ))}
           </div>
-          
-          {/* <p className="about-section__counter-message">
-            With Spanex technology, we can reduce food waste by up to 75%.
-          </p> */}
         </div>
       </div>
     </section>

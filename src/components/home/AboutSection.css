@@ -502,3 +502,71 @@
     background-color: rgba(11, 61, 145, 0.8);
   }
 }
+
+/* Add this to your ProductSection.css file */
+
+/* Mobile-specific fixes for product cards */
+@media (max-width: 767px) {
+  .products-section__card {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    min-height: 100px;
+    overflow: visible;
+  }
+  
+  .products-section__content {
+    padding: 0.75rem;
+    height: auto;
+    overflow: visible;
+  }
+  
+  .products-section__image-container {
+    height: 120px;
+    overflow: hidden;
+  }
+  
+  .products-section__image {
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .products-section__description {
+    display: block;
+    width: 100%;
+    font-size: 0.85rem;
+    white-space: normal;
+    overflow: visible;
+  }
+  
+  .products-section__header-row,
+  .products-section__name,
+  .products-section__specs,
+  .products-section__spec-row {
+    display: block;
+    width: 100%;
+    overflow: visible;
+  }
+  
+  .products-section__name {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+  
+  .products-section__type-badge {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+  }
+  
+  .products-section__spec-label,
+  .products-section__spec-value {
+    display: inline;
+    font-size: 0.8rem;
+  }
+  
+  .products-section__cta {
+    width: 100%;
+    text-align: center;
+    margin-top: 0.5rem;
+  }
+}
