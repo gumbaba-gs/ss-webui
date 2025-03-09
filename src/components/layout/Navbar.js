@@ -114,7 +114,13 @@ const Navbar = () => {
     <header className={`navbar ${isScrolled ? 'navbar--scrolled' : ''}`}>
       <div className="navbar__container">
         {/* Logo */}
-        <a href="#" className="navbar__logo" aria-label="Spanex Sciences Homepage">
+        <a  href="#" 
+            onClick={(e) => {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className="navbar__logo" 
+            aria-label="Spanex Sciences Homepage">
           <span className="navbar__logo-text">
             Span<span className="navbar__logo-accent">ex</span>{' '}
             <span className="navbar__logo-secondary">Sciences</span>
