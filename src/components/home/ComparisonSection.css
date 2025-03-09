@@ -89,7 +89,8 @@
   padding: 2rem;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1), 0 0 15px rgba(0, 255, 255, 0.2);
   border: 1px solid rgba(0, 255, 255, 0.2);
-  margin: 0 auto;
+
+  margin: 0 auto var(--space-6);
   width: 100%;
   max-width: 1200px;
   opacity: 0;
@@ -421,4 +422,28 @@
     ), url('./images/hero-bg4.jpg') center/cover no-repeat;
     position: relative; /* If you have a high-res version */
   }
+}
+
+/* CTA Container */
+.comparison-section__indicator-bars {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-1);
+  margin: var(--space-4) 0 var(--space-2);
+}
+
+.comparison-section__footnote-text {
+  font-size: var(--font-size-base);
+  margin-bottom: var(--space-4);
+  opacity: 0.9;
+}
+
+.comparison-section__footnote {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+  padding: var(--space-6);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1), 0 0 15px rgba(0, 255, 255, 0.2);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  text-align: center;
+  color: white;
 }

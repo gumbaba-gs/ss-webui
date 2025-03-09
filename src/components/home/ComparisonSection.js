@@ -737,6 +737,19 @@ const ComparisonSection = () => {
             </p>
           </div>
         </div>
+        <div className="comparison-section__footnote">
+          <p className="comparison-section__footnote-text">
+          * Comparison data based on laboratory testing and industry standards. Actual results may vary depending on specific conditions.
+          </p>
+          <div className="comparison-section__indicator-bars">
+            {[...Array(8)].map((_, index) => (
+              <div
+                key={index}
+                className={`comparison-section__indicator-bar ${index < 5 ? 'comparison-section__indicator-bar--active' : ''}`}
+              ></div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

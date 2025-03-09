@@ -1,7 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './ProductSection.css';
+import berryImage from './images/blueberries.jpeg';
+import appleImage from './images/apple.jpg'
+import leafyImage from './images/leafyveg.jpeg'
+import flowerImage from './images/flowers.jpeg'
 
-const ProductsSection = () => {
+const ProductSection = () => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
   
@@ -10,7 +14,7 @@ const ProductsSection = () => {
     {
       id: 'berry-fresh',
       name: 'Berry Fresh',
-      image: 'https://placehold.co/400x300/1a5e63/ffffff?text=Berry+Fresh',
+      image: berryImage,
       badge: 'Organic',
       badgeType: 'organic',
       description: 'Our specialized formulation for all varieties of berries, extending shelf life by 3-4x while maintaining color, texture, and flavor.',
@@ -24,7 +28,7 @@ const ProductsSection = () => {
     {
       id: 'apple-shield',
       name: 'Apple Shield',
-      image: 'https://placehold.co/400x300/1a5e63/ffffff?text=Apple+Shield',
+      image: appleImage,
       badge: 'Organic',
       badgeType: 'organic',
       description: 'Specially formulated for apples, prevents browning and maintains crispness for weeks longer than untreated fruit.',
@@ -36,9 +40,23 @@ const ProductsSection = () => {
       available: true
     },
     {
+      id: 'flora-fresh',
+      name: 'Flora Fresh',
+      image: flowerImage,
+      badge: 'Standard',
+      badgeType: 'standard',
+      description: 'Innovative flower preservation formula that extends freshness and bloom life for cut flowers and ornamental plants.',
+      specs: [
+        { label: 'Shelf Life Extension', value: '4-5X' },
+        { label: 'Application', value: 'Spray or Vase' },
+        { label: 'Available From', value: 'Q3 2025' }
+      ],
+      available: false
+    },
+    {
       id: 'leafy-green',
       name: 'Leafy Green Preserver',
-      image: 'https://placehold.co/400x300/1a5e63/ffffff?text=Leafy+Green',
+      image: leafyImage,
       badge: 'Standard',
       badgeType: 'standard',
       description: 'Advanced formulation for lettuce, spinach, and other leafy greens to prevent wilting and yellowing.',
@@ -168,4 +186,4 @@ const ProductsSection = () => {
   );
 };
 
-export default ProductsSection;
+export default ProductSection;

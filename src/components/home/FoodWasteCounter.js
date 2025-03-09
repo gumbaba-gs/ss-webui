@@ -155,7 +155,7 @@ const FoodWasteCounter = () => {
           </div>
 
           {/* Indicator bars */}
-          <div className="foodwaste-section__indicator-bars">
+          {/* <div className="foodwaste-section__indicator-bars">
             {[...Array(8)].map((_, index) => (
               <div
                 key={index}
@@ -164,7 +164,7 @@ const FoodWasteCounter = () => {
                 }`}
               ></div>
             ))}
-          </div>
+          </div> */}
 
           <p className="foodwaste-section__message">
             With Spanex Shelf Life Extender, we can reduce these losses by up to 75%.
@@ -177,9 +177,9 @@ const FoodWasteCounter = () => {
             Our innovative preservation technology can save the industry billions while reducing food waste and environmental impact.
           </p>
           
-          <a href="#products" className="foodwaste-section__cta">
+          {/* <a href="#products" className="foodwaste-section__cta">
             Explore Our Solutions
-          </a>
+          </a> */}
           
           {/* Indicator bars in footer */}
           <div className="foodwaste-section__indicator-bars">

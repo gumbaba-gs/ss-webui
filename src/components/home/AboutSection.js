@@ -243,25 +243,25 @@ const AboutSection = () => {
         </div>
         
         {/* Indicator bars */}
-        <div className="about-section__indicator-bars">
+        {/* <div className="about-section__indicator-bars">
           {[...Array(8)].map((_, index) => (
             <div
               key={index}
               className={`about-section__indicator-bar ${index < 5 ? 'about-section__indicator-bar--active' : ''}`}
             ></div>
           ))}
-        </div>
+        </div> */}
         
         {/* CTA/Footnote section */}
         <div className="about-section__footnote">
           <p className="about-section__footnote-text">
-            Ready to explore how our innovative solutions can help your business reduce waste, enhance product quality, and improve sustainability?
+          With Spanex technology, we can reduce food waste by up to 75%.
           </p>
-          
+{/*           
           <a href="#contact" className="about-section__cta">
             Contact Our Team
           </a>
-          
+           */}
           {/* Secondary indicator bars */}
           <div className="about-section__indicator-bars">
             {[...Array(8)].map((_, index) => (
@@ -272,9 +272,9 @@ const AboutSection = () => {
             ))}
           </div>
           
-          <p className="about-section__counter-message">
+          {/* <p className="about-section__counter-message">
             With Spanex technology, we can reduce food waste by up to 75%.
-          </p>
+          </p> */}
         </div>
       </div>
     </section>
