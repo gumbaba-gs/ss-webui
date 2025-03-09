@@ -1,16 +1,16 @@
 /* src/components/home/AboutSection.css */
-/* Improved CSS for better performance and mobile compatibility */
 
 .about-section {
-  padding: 4rem 0;
+  padding: var(--space-12) 0;
   position: relative;
   overflow: hidden;
   
-  /* Background with gradient overlay */
+  /* Background with gradient overlay for consistency */
   background: linear-gradient(
     rgba(11, 61, 145, 0.9), 
     rgba(0, 128, 128, 0.9)
   ), url('./images/hero-bg6.jpg') center/cover no-repeat;
+  position: relative;
 }
 
 /* Glowing effect overlay using pseudo-element */
@@ -29,16 +29,16 @@
 /* Section header styling */
 .about-section__header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: var(--space-8);
   position: relative;
   z-index: 2;
-  padding: 0 1rem;
+  padding: 0 var(--space-4);
 }
 
 .about-section__title {
   color: white;
-  margin-bottom: 0.75rem;
-  font-size: 2rem;
+  margin-bottom: var(--space-3);
+  font-size: var(--font-size-2xl);
   font-weight: 700;
   line-height: 1.2;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
@@ -49,15 +49,15 @@
   opacity: 0.9;
   max-width: 700px;
   margin: 0 auto;
-  font-size: 1rem;
+  font-size: var(--font-size-base);
   line-height: 1.5;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
-/* Main container styling */
+/* Container styling */
 .about-section__container {
   max-width: 1000px;
-  width: 92%;
+  width: 100%;
   margin: 0 auto;
   position: relative;
   z-index: 2;
@@ -84,7 +84,7 @@
   color: white;
 }
 
-/* Text container to prevent overflow issues */
+/* Text container */
 .about-section__text-container {
   margin-bottom: 1.5rem;
 }
@@ -211,7 +211,7 @@
   font-size: 0.95rem;
 }
 
-/* Metrics grid - improved for mobile */
+/* Metrics grid */
 .about-section__metrics-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -220,7 +220,7 @@
 }
 
 .about-section__metric-card {
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.1);
   padding: 0.75rem;
   border-radius: 0.5rem;
   text-align: center;
@@ -236,13 +236,13 @@
 .about-section__metric-value {
   font-size: 1.25rem;
   font-weight: 700;
-  color: #0B3D91;
+  color: white;
   margin-bottom: 0.25rem;
 }
 
 .about-section__metric-label {
   font-size: 0.75rem;
-  color: #164471;
+  color: rgba(255, 255, 255, 0.9);
   margin: 0;
 }
 
@@ -270,6 +270,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
   border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
 }
 
 .about-section__offering:hover {
@@ -289,6 +290,7 @@
   text-align: left;
   background: transparent;
   border: none;
+  color: white;
 }
 
 .about-section__offering-icon {
@@ -314,18 +316,12 @@
   font-weight: 600;
   color: white;
   margin: 0 0 0.25rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .about-section__offering-description {
   font-size: 0.8rem;
   color: rgba(255, 255, 255, 0.9);
   margin: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .about-section__offering-toggle {
@@ -334,59 +330,45 @@
   flex-shrink: 0;
 }
 
-.about-section__toggle-icon {
-  transition: transform 0.3s ease;
-}
-
 .about-section__toggle-icon--expanded {
   transform: rotate(180deg);
 }
 
+/* Critical fix for offering details visibility */
 .about-section__offering-details {
   border-top: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 0 0.75rem 0.75rem calc(36px + 1.5rem);
+  padding: 0.75rem;
+  padding-left: calc(36px + 1.5rem);
   animation: slideDown 0.3s ease-out;
+  display: block;
+  visibility: visible;
 }
 
 @keyframes slideDown {
-  from { opacity: 0; max-height: 0; }
-  to { opacity: 1; max-height: 400px; }
+  from { 
+    opacity: 0; 
+    transform: translateY(-10px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
 }
 
+/* List styling fixes */
 .about-section__details-list {
-  margin: 0.75rem 0 0;
+  margin: 0.5rem 0 0;
   padding-left: 1.25rem;
   color: rgba(255, 255, 255, 0.9);
+  list-style-type: disc;
 }
 
 .about-section__details-item {
   margin-bottom: 0.5rem;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   line-height: 1.5;
-}
-
-/* Indicator bars */
-.about-section__indicator-bars {
-  display: flex;
-  justify-content: center;
-  gap: 0.25rem;
-  margin: 1rem 0 0.5rem;
-}
-
-.about-section__indicator-bar {
-  height: 8px;
-  width: 28px;
-  background: rgba(0, 255, 255, 0.1);
-  border-radius: 4px;
-  border: 1px solid rgba(0, 255, 255, 0.2);
-  box-shadow: 0 0 5px rgba(0, 255, 255, 0.1);
-  transition: background 0.3s ease-out, box-shadow 0.3s ease-out;
-}
-
-.about-section__indicator-bar--active {
-  background: linear-gradient(to right, var(--secondary-color), var(--accent-color));
-  box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
-  border: 1px solid rgba(0, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.9);
+  display: list-item;
 }
 
 /* CTA/Footnote Section */
@@ -403,6 +385,30 @@
 .about-section__footnote-text {
   font-size: 1rem;
   opacity: 0.9;
+}
+
+/* Indicator bars - match style from other sections */
+.about-section__indicator-bars {
+  display: flex;
+  justify-content: center;
+  gap: 0.25rem;
+  margin: 1rem 0 0.5rem;
+}
+
+.about-section__indicator-bar {
+  height: 8px;
+  width: 30px;
+  background: rgba(0, 255, 255, 0.1);
+  border-radius: 4px;
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  box-shadow: 0 0 5px rgba(0, 255, 255, 0.1);
+  transition: background 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+
+.about-section__indicator-bar--active {
+  background: linear-gradient(to right, var(--secondary-color), var(--accent-color));
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+  border: 1px solid rgba(0, 255, 255, 0.5);
 }
 
 /* Responsive adjustments */
@@ -503,70 +509,34 @@
   }
 }
 
-/* Add this to your ProductSection.css file */
+/* Add this to your AboutSection.css file */
 
-/* Mobile-specific fixes for product cards */
+/* Fix for mobile background inconsistency in offerings */
+.about-section__offering {
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Mobile-specific adjustments */
 @media (max-width: 767px) {
-  .products-section__card {
-    display: flex;
-    flex-direction: column;
-    height: auto;
-    min-height: 100px;
-    overflow: visible;
+  .about-section__offering {
+    /* Explicitly set background for mobile devices */
+    background-color: rgba(11, 61, 145, 0.6);
+    /* Fallback for devices that don't support backdrop-filter */
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
-  
-  .products-section__content {
-    padding: 0.75rem;
-    height: auto;
-    overflow: visible;
-  }
-  
-  .products-section__image-container {
-    height: 120px;
-    overflow: hidden;
-  }
-  
-  .products-section__image {
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  .products-section__description {
-    display: block;
-    width: 100%;
-    font-size: 0.85rem;
-    white-space: normal;
-    overflow: visible;
-  }
-  
-  .products-section__header-row,
-  .products-section__name,
-  .products-section__specs,
-  .products-section__spec-row {
-    display: block;
-    width: 100%;
-    overflow: visible;
-  }
-  
-  .products-section__name {
-    margin-bottom: 0.5rem;
-    font-size: 1rem;
-  }
-  
-  .products-section__type-badge {
-    display: inline-block;
-    margin-bottom: 0.5rem;
-  }
-  
-  .products-section__spec-label,
-  .products-section__spec-value {
-    display: inline;
-    font-size: 0.8rem;
-  }
-  
-  .products-section__cta {
-    width: 100%;
-    text-align: center;
-    margin-top: 0.5rem;
+}
+
+/* Fallback for browsers that don't support backdrop-filter */
+@supports not (backdrop-filter: blur(5px)) {
+  .about-section__offering {
+    background-color: rgba(11, 61, 145, 0.6);
   }
 }

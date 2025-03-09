@@ -7,7 +7,7 @@ const AboutSection = () => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
   
-  // Core offerings data - moved outside the component for better performance
+  // Core offerings data
   const coreOfferings = [
     { 
       id: 'preservation', 
@@ -79,7 +79,7 @@ const AboutSection = () => {
     { value: '20+', label: 'Countries Served' }
   ];
 
-  // Toggle feature expansion with improved handling
+  // Toggle feature expansion
   const toggleFeature = (id) => {
     setExpandedFeature(prevId => prevId === id ? null : id);
   };
@@ -117,13 +117,13 @@ const AboutSection = () => {
       </div>
       
       {/* Main content container */}
-      <div 
-        ref={sectionRef}
-        className={`about-section__container ${isVisible ? 'visible' : ''}`}
-      >
-        <div className="about-section__content-card">
-          {/* Company description */}
-          <div className="about-section__content">
+      <div className="container">
+        <div 
+          ref={sectionRef}
+          className={`about-section__container ${isVisible ? 'visible' : ''}`}
+        >
+          <div className="about-section__content-card">
+            {/* Company description */}
             <div className="about-section__text-container">
               <p className="about-section__text">
                 Spanex Sciences is a <span className="about-section__highlight">pioneering scientific company</span> with over <span className="about-section__highlight">100 innovative formulations</span>, spanning both <span className="about-section__highlight--secondary">organic and non-organic solutions</span>. Our <span className="about-section__highlight--accent">proprietary technologies</span> are transforming multiple industries by enhancing <span className="about-section__highlight">preservation, sustainability, and human health</span>.
@@ -213,19 +213,9 @@ const AboutSection = () => {
                             <p className="about-section__offering-description">{offering.description}</p>
                           </div>
                           <div className="about-section__offering-toggle">
-                            <svg 
-                              className={`about-section__toggle-icon ${
-                                expandedFeature === offering.id ? 'about-section__toggle-icon--expanded' : ''
-                              }`} 
-                              width="20" height="20" 
-                              viewBox="0 0 24 24"
-                              aria-hidden="true"
-                            >
-                              <path 
-                                fill="currentColor" 
-                                d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"
-                              />
-                            </svg>
+                            <i className={`fas fa-chevron-down ${
+                              expandedFeature === offering.id ? 'about-section__toggle-icon--expanded' : ''
+                            }`}></i>
                           </div>
                         </button>
                         
@@ -249,25 +239,25 @@ const AboutSection = () => {
               )}
             </div>
           </div>
-        </div>
-        
-        {/* CTA/Footnote section */}
-        <div className="about-section__footnote">
-          <p className="about-section__footnote-text">
-            With Spanex technology, we can reduce food waste by up to 75%.
-          </p>
           
-          {/* Visual indicator bars */}
-          <div className="about-section__indicator-bars">
-            {[...Array(8)].map((_, index) => (
-              <div
-                key={index}
-                className={`about-section__indicator-bar ${
-                  index < 5 ? 'about-section__indicator-bar--active' : ''
-                }`}
-                aria-hidden="true"
-              ></div>
-            ))}
+          {/* CTA/Footnote section */}
+          <div className="about-section__footnote">
+            <p className="about-section__footnote-text">
+              With Spanex technology, we can reduce food waste by up to 75%.
+            </p>
+            
+            {/* Visual indicator bars */}
+            <div className="about-section__indicator-bars">
+              {[...Array(8)].map((_, index) => (
+                <div
+                  key={index}
+                  className={`about-section__indicator-bar ${
+                    index < 5 ? 'about-section__indicator-bar--active' : ''
+                  }`}
+                  aria-hidden="true"
+                ></div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
