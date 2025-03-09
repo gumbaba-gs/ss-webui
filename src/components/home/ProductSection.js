@@ -68,7 +68,7 @@ const ProductSection = () => {
     {
       id: 'citrus-guard',
       name: 'Citrus Guard',
-      image: 'https://placehold.co/800x600/FF9D48/ffffff?text=Citrus+Guard',
+      image: orangesImage,
       badge: 'Organic',
       badgeType: 'organic',
       description: 'Specially formulated for oranges and citrus fruits, prevents moisture loss and maintains vibrant color and flavor profile.',
@@ -82,7 +82,7 @@ const ProductSection = () => {
     {
       id: 'avocado-extend',
       name: 'Avocado Extend',
-      image: 'https://placehold.co/800x600/568203/ffffff?text=Avocado+Extend',
+      image: avocadoImage,
       badge: 'Organic',
       badgeType: 'organic',
       description: 'Specially formulated for avocados, delays ripening process and prevents browning while preserving creamy texture.',
